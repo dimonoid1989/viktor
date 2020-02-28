@@ -90,7 +90,7 @@ namespace PrototypeGeniyIdiotConsoleApp
             var answers = new List<int> { 6, 9, 25, 60, 2 };
             return answers;
         }
-        static string GetDiagnoses(int result)
+        static string DiscoverDiagnoses(int result)
         {
             var diagnoses = new List<string> { "Идиот", "Кретин", "Дурак", "Нормальный", "Талант", "Гений" };
             return diagnoses[result];
@@ -99,18 +99,8 @@ namespace PrototypeGeniyIdiotConsoleApp
         {
 
             double percentRightAnswers = countRightAnswer / (double)GetQuestions().Count * 100;
-            int result = 0;
-            if (percentRightAnswers >= 20 && percentRightAnswers < 40)
-            { result = 1; }
-            else if (percentRightAnswers >= 40 && percentRightAnswers < 60)
-            { result = 2; }
-            else if (percentRightAnswers >= 60 && percentRightAnswers < 80)
-            { result = 3; }
-            else if (percentRightAnswers >= 80 && percentRightAnswers < 100)
-            { result = 4; }
-            else if (percentRightAnswers == 100)
-            { result = 5; }
-            return GetDiagnoses(result);
+            int result = Convert.ToInt32(percentRightAnswers / 20);
+            return DiscoverDiagnoses(result);
 
         }
         static void GetStatistics(string answer)
