@@ -18,6 +18,7 @@ namespace PrototypeGeniyIdiotConsoleApp
                 string name = Console.ReadLine();
                 int countRightAnswer = 0;
                 List<Question> questions = GetQuestions();
+                List<Diagnoses> diagnoses = DiscoverDiagnoses();
                 int questionNumberCounter = 1;
                 while (questions.Count > 0)
                 {
@@ -35,7 +36,7 @@ namespace PrototypeGeniyIdiotConsoleApp
                     questions.Remove(questions[randomQuestionIndex]);
                 }
 
-                string resultDiagnose = CalculateDiagnose(countRightAnswer);
+                string resultDiagnose = diagnoses[Diagnoses.CalculateDiagnose(countRightAnswer)].Print();
                 string countRightAnswerText = $"Число правильных ответов: {countRightAnswer}";
                 string diagnoseText = $"{name}, Ваш диагноз: {resultDiagnose}";
 
@@ -71,32 +72,37 @@ namespace PrototypeGeniyIdiotConsoleApp
             }
             return userAnswer;
         }
-        static List<Question> GetQuestions()
+        public static List<Question> GetQuestions()
         {
-            var questions = new List<Question>();
-            questions.Add(new Question("Сколько будет два плюс два  умноженное на два?", 6));
-            questions.Add(new Question ("Бревно нужно распилить на 10  частей, сколько надо сделать  распилов?", 9));
-            questions.Add(new Question ("На двух руках 10 пальцев. Сколько пальцев на 5 руках?", 25));
-            questions.Add(new Question ("Укол делают каждые полчаса,  сколько нужно минут для трех  уколов?", 60));
-            questions.Add(new Question ("Пять свечей горело, две  потухли. Сколько свечей  осталось?", 2));
+            var questions = new List<Question>
+            {
+                new Question("Сколько будет два плюс два  умноженное на два?", 6),
+                new Question("Бревно нужно распилить на 10  частей, сколько надо сделать  распилов?", 9),
+                new Question("На двух руках 10 пальцев. Сколько пальцев на 5 руках?", 25),
+                new Question("Укол делают каждые полчаса,  сколько нужно минут для трех  уколов?", 60),
+                new Question("Пять свечей горело, две  потухли. Сколько свечей  осталось?", 2)
+            };
 
 
-            return questions;
+            return questions; 
         }
         
-        static string DiscoverDiagnoses(int result)
+        public static List<Diagnoses> DiscoverDiagnoses()
         {
-            var diagnoses = new List<string> { "Идиот", "Кретин", "Дурак", "Нормальный", "Талант", "Гений" };
-            return diagnoses[result];
-        }
-        static string CalculateDiagnose(int countRightAnswer)
-        {
+            var diagnoses = new List<Diagnoses>
+            {
+                new Diagnoses("Идиот"),
+                new Diagnoses("Кретин"),
+                new Diagnoses("Дурак"),
+                new Diagnoses("Нормальный"),
+                new Diagnoses("Талант"),
+                new Diagnoses("Гений")
+            };
 
-            double percentRightAnswers = countRightAnswer / (double)GetQuestions().Count * 100;
-            int result = Convert.ToInt32(percentRightAnswers / 20);
-            return DiscoverDiagnoses(result);
 
+            return diagnoses; 
         }
+        
         static void GetStatistics(string answer)
         {
             if (answer == "да" || answer == "Да" || answer == "ДА")
