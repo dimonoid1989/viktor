@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
 
 
@@ -15,8 +14,8 @@ namespace PrototypeGeniyIdiotConsoleApp
             {
 
                 Console.WriteLine("Как Вас зовут?");
-                string name = Console.ReadLine();
-                int countRightAnswer = 0;
+                string name = Console.ReadLine(); //
+                int countRightAnswer = 0; //
                 List<Question> questions = GetQuestions();
                 List<Diagnoses> diagnoses = DiscoverDiagnoses();
                 int questionNumberCounter = 1;
@@ -36,33 +35,28 @@ namespace PrototypeGeniyIdiotConsoleApp
                     questions.Remove(questions[randomQuestionIndex]);
                 }
 
-                string resultDiagnose = diagnoses[Diagnoses.CalculateDiagnose(countRightAnswer)].Print();
+                string resultDiagnose = diagnoses[Diagnoses.CalculateDiagnose(countRightAnswer)].Print(); //
                 string countRightAnswerText = $"Число правильных ответов: {countRightAnswer}";
                 string diagnoseText = $"{name}, Ваш диагноз: {resultDiagnose}";
+
+                Users user = new Users(name, countRightAnswer, resultDiagnose);
 
                 Console.WriteLine(countRightAnswerText);
                 Console.WriteLine(diagnoseText);
 
-                SaveResultInMyDocuments(name, countRightAnswer, resultDiagnose);
+                FileSystem.SaveResultInMyDocuments(user.Name, user.RightAnswers, user.Diagnose);
 
                 Console.WriteLine("Вывести статистику игр? (введите: да/нет)");
-                GetStatistics(Console.ReadLine());
+                FileSystem.GetStatistics(Console.ReadLine());
                 Console.WriteLine("Хотите сыграть еще? (введите: да/нет)");
                 newGame = Restart(Console.ReadLine());
+                
 
             }
             while (newGame == true);
 
         }
-        static void SaveResultInMyDocuments(string name, int countRightAnswer, string resultDiagnose)
-        {
-            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            using (StreamWriter outputFile = File.AppendText(Path.Combine(docPath, "WriteLines.txt")))
-            {
-                outputFile.WriteLine("{0, -10}\t  {1, 7}\t  {2 , 13}", name, countRightAnswer, resultDiagnose.ToString());
-
-            }
-        }
+        
         static int TryGetUserAnswer()
         {
             string answer = Console.ReadLine();
@@ -102,27 +96,7 @@ namespace PrototypeGeniyIdiotConsoleApp
 
             return diagnoses; 
         }
-        
-        static void GetStatistics(string answer)
-        {
-            if (answer == "да" || answer == "Да" || answer == "ДА")
-            {
-
-                string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                StreamReader outputFile = new StreamReader(Path.Combine(docPath, "WriteLines.txt"));
-
-                Console.WriteLine("Имя:\t Кол-во правильных ответов:\t  Диагноз:");
-                Console.WriteLine("________________________________________________");
-                while (outputFile.Peek() >= 0)
-                {
-                    Console.WriteLine(outputFile.ReadLine());
-                    Console.WriteLine();
-
-                }
-                outputFile.Close();
-
-            }
-        }
+       
         static bool Restart(string answer)
         {
             bool newGame;
