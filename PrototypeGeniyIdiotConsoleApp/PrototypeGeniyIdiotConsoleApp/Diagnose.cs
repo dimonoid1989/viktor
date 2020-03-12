@@ -24,6 +24,6 @@ namespace PrototypeGeniyIdiotConsoleApp
             
 
         }
-        //public Diagnose Print() => Name;
+        
     }
 }

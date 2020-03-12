@@ -9,61 +9,86 @@ namespace PrototypeGeniyIdiotConsoleApp
     {
         public static void Main(string[] args)
         {
-            bool newGame;
+
+
+            Console.WriteLine("Начать новую игру? (введите: да/нет)");
+            bool newGame = NewGame(Console.ReadLine());
 
             do
             {
 
-                Console.WriteLine("Как Вас зовут?");
-                string name = Console.ReadLine();
-                User user = new User(name);
-                List<Question> questions = GetQuestions();
-                int questionNumberCounter = 1;
-                while (questions.Count > 0)
+
+                if (newGame == true)
                 {
-                    Random random = new Random();
-                    int randomQuestionIndex = random.Next(questions.Count);
-                    Console.WriteLine("Вопрос №" + questionNumberCounter);
-                    Console.WriteLine(questions[randomQuestionIndex].Print());
-                    int userAnswer = TryGetUserAnswer();
-                    int rightAnswer = questions[randomQuestionIndex].Answer;
-                    if (userAnswer == rightAnswer)
+
+                    Console.WriteLine("Как Вас зовут?");
+                    string name = Console.ReadLine();
+                    User user = new User(name);
+                    List<Question> questions = GetQuestions();
+                    int questionNumberCounter = 1;
+                    while (questions.Count > 0)
                     {
-                        user.RightAnswers++;
+                        Random random = new Random();
+                        int randomQuestionIndex = random.Next(questions.Count);
+                        Console.WriteLine("Вопрос №" + questionNumberCounter);
+                        Console.WriteLine(questions[randomQuestionIndex].Print());
+                        int userAnswer = TryGetUserAnswer();
+                        int rightAnswer = questions[randomQuestionIndex].Answer;
+                        if (userAnswer == rightAnswer)
+                        {
+                            user.RightAnswers++;
+                        }
+                        questionNumberCounter++;
+                        questions.Remove(questions[randomQuestionIndex]);
                     }
-                    questionNumberCounter++;
-                    questions.Remove(questions[randomQuestionIndex]);
+
+                    var resultDiagnose = Diagnose.CalculateDiagnose(user);
+                    user.Diagnose = resultDiagnose;
+
+
+                    string countRightAnswerText = $"Число правильных ответов: {user.RightAnswers}";
+                    string diagnoseText = $"{user.Name}, Ваш диагноз: {user.Diagnose.Name}";
+
+                    Console.WriteLine(countRightAnswerText);
+                    Console.WriteLine(diagnoseText);
+
+                    SaveResultInMyDocuments(user);
                 }
 
-                var resultDiagnose = Diagnose.CalculateDiagnose(user);
-                user.Diagnose = resultDiagnose;
-
-
-                string countRightAnswerText = $"Число правильных ответов: {user.RightAnswers}";
-                string diagnoseText = $"{user.Name}, Ваш диагноз: {user.Diagnose}";
-
-                Console.WriteLine(countRightAnswerText);
-                Console.WriteLine(diagnoseText);
-
-                SaveResultInMyDocuments(user);
 
                 Console.WriteLine("Вывести статистику игр? (введите: да/нет)");
                 GetStatistics(Console.ReadLine());
                 Console.WriteLine("Хотите сыграть еще? (введите: да/нет)");
-                newGame = Restart(Console.ReadLine());
+                if (NewGame(Console.ReadLine()) == true)
+                {
+                    continue;
+
+                }
+                Console.WriteLine("Хотите добавить свой вопрос? (введите: да/нет)");
+                newGame = AddQuestion(Console.ReadLine());
 
 
-            }
-            while (newGame == true);
+            } while (newGame == true);
+
 
         }
 
         static int TryGetUserAnswer()
         {
-            string answer = Console.ReadLine();
-            if (!int.TryParse(answer, out int userAnswer))
+            bool answerType = false;
+            int userAnswer = 0;
+            while (answerType == false)
             {
-                Console.WriteLine("Введенный ответ не является числом");
+                string answer = Console.ReadLine();
+                if (!int.TryParse(answer, out userAnswer))
+                {
+                    Console.WriteLine("Введенный ответ не является числом");
+
+                }
+                else
+                {
+                    answerType = true;
+                }
             }
             return userAnswer;
         }
@@ -77,7 +102,17 @@ namespace PrototypeGeniyIdiotConsoleApp
                 new Question("Укол делают каждые полчаса,  сколько нужно минут для трех  уколов?", 60),
                 new Question("Пять свечей горело, две  потухли. Сколько свечей  осталось?", 2)
             };
-
+            var result = FileSystem.GetNewQuestions();
+            string[] delimeter = new string[1];
+            delimeter[0] = "\r\n";
+            var SplitedStrings = result.Split(delimeter, StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < SplitedStrings.Length; i++)
+            {
+                var splitedWord = SplitedStrings[i].Split('$');
+                int a = Convert.ToInt32(splitedWord[1]);
+                Question question = new Question(splitedWord[0], a);
+                questions.Add(question);
+            }
 
             return questions;
         }
@@ -98,7 +133,7 @@ namespace PrototypeGeniyIdiotConsoleApp
             return diagnoses;
         }
 
-        static bool Restart(string answer)
+        public static bool NewGame(string answer)
         {
             bool newGame;
             if (answer == "да" || answer == "Да" || answer == "ДА")
@@ -122,23 +157,44 @@ namespace PrototypeGeniyIdiotConsoleApp
 
             {
                 Console.WriteLine("{0,-20}{1,-40}{2,-15}", "Имя:", "Кол-во правильных ответов:", "Диагноз:");
-                Console.WriteLine("___________________________________________________");
+                Console.WriteLine("____________________________________________________________________");
                 var result = FileSystem.GetString();
-                string[] c = new string[1];
-                c[0] = "\r\n";
-                var a = result.Split(c, StringSplitOptions.RemoveEmptyEntries);
+                string[] delimeter = new string[1];
+                delimeter[0] = "\r\n";
+                var SplitedStrings = result.Split(delimeter, StringSplitOptions.RemoveEmptyEntries);
 
-                for (int i = 0; i < a.Length; i++)
+                for (int i = 0; i < SplitedStrings.Length; i++)
                 {
-                    var g = a[i].Split('$');
+                    var splitedWord = SplitedStrings[i].Split('$');
 
-                    Console.WriteLine("{0,-30}{1,-40}{2,-15}", g[0], g[1], g[2]);
+                    Console.WriteLine("{0,-30}{1,-30}{2,-12}", splitedWord[0], splitedWord[1], splitedWord[2]);
+                    Console.WriteLine();
                 }
 
 
             }
         }
 
+        public static bool AddQuestion(string solution)
+        {
+            if (solution == "да" || solution == "Да" || solution == "ДА")
+            {
+                Console.WriteLine("Введите новый вопрос");
+                string question = Console.ReadLine();
+                Console.WriteLine("Введите ответ на вопрос");
+                int answer = TryGetUserAnswer();
+                FileSystem.SaveNewQuestions(question + '$' + answer);
+                Console.WriteLine("Начать игру?");
+                return NewGame(Console.ReadLine());
+
+
+            }
+            else
+            {
+                bool newGame = false;
+                return newGame;
+            }
+        }
 
     }
 

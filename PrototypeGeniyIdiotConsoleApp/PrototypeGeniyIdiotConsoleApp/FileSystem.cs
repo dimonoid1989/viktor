@@ -19,5 +19,17 @@ namespace PrototypeGeniyIdiotConsoleApp
             { return outputFile.ReadToEnd(); }
 
         }
+        public static void SaveNewQuestions(string newQuestion)
+        {
+            using (StreamWriter outputFile = File.AppendText(Path.Combine(docPath, "Class.txt")))
+            { outputFile.WriteLine(newQuestion); }
+        }
+        public static string GetNewQuestions()
+        {
+            using (StreamReader outputFile = new StreamReader(Path.Combine(docPath, "Class.txt")))
+            { return outputFile.ReadToEnd(); }
+
+        }
+
     }
 }

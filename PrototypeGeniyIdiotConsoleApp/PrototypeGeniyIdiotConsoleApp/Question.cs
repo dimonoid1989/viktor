@@ -1,7 +1,7 @@
 ﻿namespace PrototypeGeniyIdiotConsoleApp
-{
-    class Question
-    {
+{ 
+    class Question 
+    { 
         public string Text;
         public int Answer;
 
