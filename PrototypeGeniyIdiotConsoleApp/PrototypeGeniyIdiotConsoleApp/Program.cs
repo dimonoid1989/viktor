@@ -1,6 +1,6 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 
 
 namespace PrototypeGeniyIdiotConsoleApp
@@ -9,121 +9,131 @@ namespace PrototypeGeniyIdiotConsoleApp
     {
         public static void Main(string[] args)
         {
-            bool newGame;
+
+
+            Console.WriteLine("Начать новую игру? (введите: да/нет)");
+            bool newGame = NewGame(Console.ReadLine());
 
             do
             {
 
-                Console.WriteLine("Как Вас зовут?");
-                string name = Console.ReadLine();
-                int countRightAnswer = 0;
-                List<string> questions = GetQuestions();
-                List<int> answers = GetAnswers();
-                int questionNumberCounter = 1;
-                while (questions.Count > 0)
+
+                if (newGame == true)
                 {
-                    Random random = new Random();
-                    int questionIndex = random.Next(questions.Count);
-                    Console.WriteLine("Вопрос №" + questionNumberCounter);
-                    Console.WriteLine(questions[questionIndex]);
-                    questions.Remove(questions[questionIndex]);
-                    int userAnswer = TryGetUserAnswer();
-                    int rightAnswer = answers[questionIndex];
-                    answers.Remove(answers[questionIndex]);
-                    if (userAnswer == rightAnswer)
+
+                    Console.WriteLine("Как Вас зовут?");
+                    string name = Console.ReadLine();
+                    User user = new User(name);
+                    List<Question> questions = GetQuestions();
+                    int questionNumberCounter = 1;
+                    while (questions.Count > 0)
                     {
-                        countRightAnswer++;
+                        Random random = new Random();
+                        int randomQuestionIndex = random.Next(questions.Count);
+                        Console.WriteLine("Вопрос №" + questionNumberCounter);
+                        Console.WriteLine(questions[randomQuestionIndex].Print());
+                        int userAnswer = TryGetUserAnswer();
+                        int rightAnswer = questions[randomQuestionIndex].Answer;
+                        if (userAnswer == rightAnswer)
+                        {
+                            user.RightAnswers++;
+                        }
+                        questionNumberCounter++;
+                        questions.Remove(questions[randomQuestionIndex]);
                     }
-                    questionNumberCounter++;
+
+                    var resultDiagnose = Diagnose.CalculateDiagnose(user);
+                    user.Diagnose = resultDiagnose;
+
+
+                    string countRightAnswerText = $"Число правильных ответов: {user.RightAnswers}";
+                    string diagnoseText = $"{user.Name}, Ваш диагноз: {user.Diagnose.Name}";
+
+                    Console.WriteLine(countRightAnswerText);
+                    Console.WriteLine(diagnoseText);
+
+                    SaveResultInMyDocuments(user);
                 }
 
-                string resultDiagnose = CalculateDiagnose(countRightAnswer);
-                string countRightAnswerText = $"Число правильных ответов: {countRightAnswer}";
-                string diagnoseText = $"{name}, Ваш диагноз: {resultDiagnose}";
-
-                Console.WriteLine(countRightAnswerText);
-                Console.WriteLine(diagnoseText);
-
-                SaveResultInMyDocuments(name, countRightAnswer, resultDiagnose);
 
                 Console.WriteLine("Вывести статистику игр? (введите: да/нет)");
                 GetStatistics(Console.ReadLine());
                 Console.WriteLine("Хотите сыграть еще? (введите: да/нет)");
-                newGame = Restart(Console.ReadLine());
+                if (NewGame(Console.ReadLine()) == true)
+                {
+                    continue;
 
-            }
-            while (newGame == true);
+                }
+                Console.WriteLine("Хотите добавить свой вопрос? (введите: да/нет)");
+                newGame = AddQuestion(Console.ReadLine());
+
+
+            } while (newGame == true);
+
 
         }
-        static void SaveResultInMyDocuments(string name, int countRightAnswer, string resultDiagnose)
-        {
-            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            using (StreamWriter outputFile = File.AppendText(Path.Combine(docPath, "WriteLines.txt")))
-            {
-                outputFile.WriteLine("{0, -10}\t  {1, 7}\t  {2 , 13}", name, countRightAnswer, resultDiagnose.ToString());
 
-            }
-        }
         static int TryGetUserAnswer()
         {
-            string answer = Console.ReadLine();
-            if (!int.TryParse(answer, out int userAnswer))
+            bool answerType = false;
+            int userAnswer = 0;
+            while (answerType == false)
             {
-                Console.WriteLine("Введенный ответ не является числом");
+                string answer = Console.ReadLine();
+                if (!int.TryParse(answer, out userAnswer))
+                {
+                    Console.WriteLine("Введенный ответ не является числом");
+
+                }
+                else
+                {
+                    answerType = true;
+                }
             }
             return userAnswer;
         }
-        static List<string> GetQuestions()
+        public static List<Question> GetQuestions()
         {
-            var questions = new List<string>();
-            questions.Add("Сколько будет два плюс два  умноженное на два?");
-            questions.Add("Бревно нужно распилить на 10  частей, сколько надо сделать  распилов?");
-            questions.Add("На двух руках 10 пальцев. Сколько пальцев на 5 руках?");
-            questions.Add("Укол делают каждые полчаса,  сколько нужно минут для трех  уколов?");
-            questions.Add("Пять свечей горело, две  потухли. Сколько свечей  осталось?");
-
+            var questions = new List<Question>
+            {
+                new Question("Сколько будет два плюс два  умноженное на два?", 6),
+                new Question("Бревно нужно распилить на 10  частей, сколько надо сделать  распилов?", 9),
+                new Question("На двух руках 10 пальцев. Сколько пальцев на 5 руках?", 25),
+                new Question("Укол делают каждые полчаса,  сколько нужно минут для трех  уколов?", 60),
+                new Question("Пять свечей горело, две  потухли. Сколько свечей  осталось?", 2)
+            };
+            var result = FileSystem.GetNewQuestions();
+            string[] delimeter = new string[1];
+            delimeter[0] = "\r\n";
+            var SplitedStrings = result.Split(delimeter, StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < SplitedStrings.Length; i++)
+            {
+                var splitedWord = SplitedStrings[i].Split('$');
+                int a = Convert.ToInt32(splitedWord[1]);
+                Question question = new Question(splitedWord[0], a);
+                questions.Add(question);
+            }
 
             return questions;
         }
-        static List<int> GetAnswers()
-        {
-            var answers = new List<int> { 6, 9, 25, 60, 2 };
-            return answers;
-        }
-        static string DiscoverDiagnoses(int result)
-        {
-            var diagnoses = new List<string> { "Идиот", "Кретин", "Дурак", "Нормальный", "Талант", "Гений" };
-            return diagnoses[result];
-        }
-        static string CalculateDiagnose(int countRightAnswer)
-        {
 
-            double percentRightAnswers = countRightAnswer / (double)GetQuestions().Count * 100;
-            int result = Convert.ToInt32(percentRightAnswers / 20);
-            return DiscoverDiagnoses(result);
-
-        }
-        static void GetStatistics(string answer)
+        public static List<Diagnose> DiscoverDiagnoses()
         {
-            if (answer == "да" || answer == "Да" || answer == "ДА")
+            var diagnoses = new List<Diagnose>
             {
+                new Diagnose("Идиот"),
+                new Diagnose("Кретин"),
+                new Diagnose("Дурак"),
+                new Diagnose("Нормальный"),
+                new Diagnose("Талант"),
+                new Diagnose("Гений")
+            };
 
-                string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                StreamReader outputFile = new StreamReader(Path.Combine(docPath, "WriteLines.txt"));
 
-                Console.WriteLine("Имя:\t Кол-во правильных ответов:\t  Диагноз:");
-                Console.WriteLine("________________________________________________");
-                while (outputFile.Peek() >= 0)
-                {
-                    Console.WriteLine(outputFile.ReadLine());
-                    Console.WriteLine();
-
-                }
-                outputFile.Close();
-
-            }
+            return diagnoses;
         }
-        static bool Restart(string answer)
+
+        public static bool NewGame(string answer)
         {
             bool newGame;
             if (answer == "да" || answer == "Да" || answer == "ДА")
@@ -136,8 +146,55 @@ namespace PrototypeGeniyIdiotConsoleApp
             }
             return newGame;
         }
+        public static void SaveResultInMyDocuments(User user)
+        {
+            FileSystem.SaveString(user.Name + '$' + user.RightAnswers + '$' + user.Diagnose.Name);
+        }
+
+        public static void GetStatistics(string answer)
+        {
+            if (answer == "да" || answer == "Да" || answer == "ДА")
+
+            {
+                Console.WriteLine("{0,-20}{1,-40}{2,-15}", "Имя:", "Кол-во правильных ответов:", "Диагноз:");
+                Console.WriteLine("____________________________________________________________________");
+                var result = FileSystem.GetString();
+                string[] delimeter = new string[1];
+                delimeter[0] = "\r\n";
+                var SplitedStrings = result.Split(delimeter, StringSplitOptions.RemoveEmptyEntries);
+
+                for (int i = 0; i < SplitedStrings.Length; i++)
+                {
+                    var splitedWord = SplitedStrings[i].Split('$');
+
+                    Console.WriteLine("{0,-30}{1,-30}{2,-12}", splitedWord[0], splitedWord[1], splitedWord[2]);
+                    Console.WriteLine();
+                }
 
 
+            }
+        }
+
+        public static bool AddQuestion(string solution)
+        {
+            if (solution == "да" || solution == "Да" || solution == "ДА")
+            {
+                Console.WriteLine("Введите новый вопрос");
+                string question = Console.ReadLine();
+                Console.WriteLine("Введите ответ на вопрос");
+                int answer = TryGetUserAnswer();
+                FileSystem.SaveNewQuestions(question + '$' + answer);
+                Console.WriteLine("Начать игру?");
+                return NewGame(Console.ReadLine());
+
+
+            }
+            else
+            {
+                bool newGame = false;
+                return newGame;
+            }
+        }
 
     }
 
