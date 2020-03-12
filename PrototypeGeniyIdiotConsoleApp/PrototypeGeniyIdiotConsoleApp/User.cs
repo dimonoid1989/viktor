@@ -16,11 +16,7 @@ namespace PrototypeGeniyIdiotConsoleApp
             
         }
        
-        public static int WriteHereRightAnswers()
-        {
-            int rightAnswers = 0;
-            return rightAnswers;
-        }
+     
 
        
     }

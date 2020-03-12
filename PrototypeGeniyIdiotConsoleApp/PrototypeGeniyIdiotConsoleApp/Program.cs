@@ -12,7 +12,7 @@ namespace PrototypeGeniyIdiotConsoleApp
 
 
             Console.WriteLine("Начать новую игру? (введите: да/нет)");
-            bool newGame = NewGame(Console.ReadLine());
+            bool newGame = CheckAnswer(Console.ReadLine());
 
             do
             {
@@ -59,7 +59,7 @@ namespace PrototypeGeniyIdiotConsoleApp
                 Console.WriteLine("Вывести статистику игр? (введите: да/нет)");
                 GetStatistics(Console.ReadLine());
                 Console.WriteLine("Хотите сыграть еще? (введите: да/нет)");
-                if (NewGame(Console.ReadLine()) == true)
+                if (CheckAnswer(Console.ReadLine()) == true)
                 {
                     continue;
 
@@ -102,7 +102,7 @@ namespace PrototypeGeniyIdiotConsoleApp
                 new Question("Укол делают каждые полчаса,  сколько нужно минут для трех  уколов?", 60),
                 new Question("Пять свечей горело, две  потухли. Сколько свечей  осталось?", 2)
             };
-            var result = FileSystem.GetNewQuestions();
+            var result = FileSystem.GetString("Class.txt");
             string[] delimeter = new string[1];
             delimeter[0] = "\r\n";
             var SplitedStrings = result.Split(delimeter, StringSplitOptions.RemoveEmptyEntries);
@@ -133,7 +133,7 @@ namespace PrototypeGeniyIdiotConsoleApp
             return diagnoses;
         }
 
-        public static bool NewGame(string answer)
+        public static bool CheckAnswer(string answer)
         {
             bool newGame;
             if (answer == "да" || answer == "Да" || answer == "ДА")
@@ -148,7 +148,7 @@ namespace PrototypeGeniyIdiotConsoleApp
         }
         public static void SaveResultInMyDocuments(User user)
         {
-            FileSystem.SaveString(user.Name + '$' + user.RightAnswers + '$' + user.Diagnose.Name);
+            FileSystem.SaveString(user.Name + '$' + user.RightAnswers + '$' + user.Diagnose.Name, "WriteLines.txt");
         }
 
         public static void GetStatistics(string answer)
@@ -158,7 +158,7 @@ namespace PrototypeGeniyIdiotConsoleApp
             {
                 Console.WriteLine("{0,-20}{1,-40}{2,-15}", "Имя:", "Кол-во правильных ответов:", "Диагноз:");
                 Console.WriteLine("____________________________________________________________________");
-                var result = FileSystem.GetString();
+                var result = FileSystem.GetString("WriteLines.txt");
                 string[] delimeter = new string[1];
                 delimeter[0] = "\r\n";
                 var SplitedStrings = result.Split(delimeter, StringSplitOptions.RemoveEmptyEntries);
@@ -183,9 +183,9 @@ namespace PrototypeGeniyIdiotConsoleApp
                 string question = Console.ReadLine();
                 Console.WriteLine("Введите ответ на вопрос");
                 int answer = TryGetUserAnswer();
-                FileSystem.SaveNewQuestions(question + '$' + answer);
+                FileSystem.SaveString(question + '$' + answer, "Class.txt");
                 Console.WriteLine("Начать игру?");
-                return NewGame(Console.ReadLine());
+                return CheckAnswer(Console.ReadLine());
 
 
             }
