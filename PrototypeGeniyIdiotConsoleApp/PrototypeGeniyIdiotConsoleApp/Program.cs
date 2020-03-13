@@ -177,6 +177,7 @@ namespace PrototypeGeniyIdiotConsoleApp
 
         public static bool AddQuestion(string solution)
         {
+            
             if (solution == "да" || solution == "Да" || solution == "ДА")
             {
                 Console.WriteLine("Введите новый вопрос");
