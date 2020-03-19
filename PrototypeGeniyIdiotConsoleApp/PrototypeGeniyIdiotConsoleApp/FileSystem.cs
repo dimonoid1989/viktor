@@ -7,29 +7,16 @@ namespace PrototypeGeniyIdiotConsoleApp
     class FileSystem
     {
          public static string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
-        public static void SaveString(string value)
+        
+        public static void SaveString(string value, string fileName)
         {
-            using (StreamWriter outputFile = File.AppendText(Path.Combine(docPath, "WriteLines.txt")))
+            using (StreamWriter outputFile = File.AppendText(Path.Combine(docPath, fileName)))
             { outputFile.WriteLine(value); }
         }
-        public static string GetString()
+        public static string GetString(string fileName)
         {
-            using (StreamReader outputFile = new StreamReader(Path.Combine(docPath, "WriteLines.txt")))
+            using (StreamReader outputFile = new StreamReader(Path.Combine(docPath, fileName)))
             { return outputFile.ReadToEnd(); }
-
         }
-        public static void SaveNewQuestions(string newQuestion)
-        {
-            using (StreamWriter outputFile = File.AppendText(Path.Combine(docPath, "Class.txt")))
-            { outputFile.WriteLine(newQuestion); }
-        }
-        public static string GetNewQuestions()
-        {
-            using (StreamReader outputFile = new StreamReader(Path.Combine(docPath, "Class.txt")))
-            { return outputFile.ReadToEnd(); }
-
-        }
-
     }
 }

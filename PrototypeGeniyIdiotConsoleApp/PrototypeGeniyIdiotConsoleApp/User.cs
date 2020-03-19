@@ -1,7 +1,4 @@
-﻿using System;
-
-
-namespace PrototypeGeniyIdiotConsoleApp
+﻿namespace PrototypeGeniyIdiotConsoleApp
 {
     class User
     {
@@ -15,13 +12,5 @@ namespace PrototypeGeniyIdiotConsoleApp
             RightAnswers = 0;
             
         }
-       
-        public static int WriteHereRightAnswers()
-        {
-            int rightAnswers = 0;
-            return rightAnswers;
-        }
-
-       
     }
 }

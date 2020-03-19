@@ -8,22 +8,31 @@ namespace PrototypeGeniyIdiotConsoleApp
     class Diagnose
     {
         public string Name;
-        
 
         public Diagnose(string text)
         {
             Name = text;
-            
         }
-        public static Diagnose  CalculateDiagnose(User user)
+
+        public static Diagnose  CalculateDiagnose(User user, int countQuestions)
         {
-
-            double percentRightAnswers = user.RightAnswers / (double)Program.GetQuestions().Count * 100;
-            int result = Convert.ToInt32(percentRightAnswers / 20);
-            return Program.DiscoverDiagnoses()[result];
-            
-
+            var percentRightAnswers = user.RightAnswers * 100.0 / countQuestions;
+            var result = Convert.ToInt32(percentRightAnswers / 20);
+            return GetDiagnoses()[result];
         }
-        
+
+        public static List<Diagnose> GetDiagnoses()
+        {
+            var diagnoses = new List<Diagnose>
+            {
+                new Diagnose("Идиот"),
+                new Diagnose("Кретин"),
+                new Diagnose("Дурак"),
+                new Diagnose("Нормальный"),
+                new Diagnose("Талант"),
+                new Diagnose("Гений")
+            };
+            return diagnoses;
+        }
     }
 }
