@@ -1,6 +1,6 @@
 ﻿namespace GeniyIdiotWindowsFormsApp
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -36,10 +36,10 @@
             // questionTextLabel
             // 
             this.questionTextLabel.AutoSize = true;
-            this.questionTextLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.questionTextLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.questionTextLabel.Location = new System.Drawing.Point(42, 40);
             this.questionTextLabel.Name = "questionTextLabel";
-            this.questionTextLabel.Size = new System.Drawing.Size(131, 20);
+            this.questionTextLabel.Size = new System.Drawing.Size(117, 16);
             this.questionTextLabel.TabIndex = 0;
             this.questionTextLabel.Text = "Текст вопроса";
             // 
@@ -58,17 +58,19 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "Далее";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(448, 298);
+            this.ClientSize = new System.Drawing.Size(621, 298);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.questionAnswerTextBox);
             this.Controls.Add(this.questionTextLabel);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Гений-Идиот";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

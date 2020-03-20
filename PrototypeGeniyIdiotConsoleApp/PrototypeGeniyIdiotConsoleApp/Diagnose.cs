@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace PrototypeGeniyIdiotConsoleApp
 {
-    class Diagnose
+    public class Diagnose
     {
         public string Name;
 
@@ -14,7 +14,7 @@ namespace PrototypeGeniyIdiotConsoleApp
             Name = text;
         }
 
-        public static Diagnose  CalculateDiagnose(User user, int countQuestions)
+        public static Diagnose CalculateDiagnose(User user, int countQuestions)
         {
             var percentRightAnswers = user.RightAnswers * 100.0 / countQuestions;
             var result = Convert.ToInt32(percentRightAnswers / 20);

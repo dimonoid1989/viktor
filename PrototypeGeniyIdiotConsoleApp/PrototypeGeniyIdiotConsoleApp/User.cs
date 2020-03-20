@@ -1,6 +1,6 @@
 ﻿namespace PrototypeGeniyIdiotConsoleApp
 {
-    class User
+    public class User
     {
         public string Name;
         public int RightAnswers;
@@ -10,7 +10,6 @@
         {
             Name = name;
             RightAnswers = 0;
-            
         }
     }
 }
