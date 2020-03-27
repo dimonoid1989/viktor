@@ -1,27 +1,55 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using PrototypeGeniyIdiotConsoleApp;
+using System.Diagnostics;
 
 namespace GeniyIdiotWindowsFormsApp
 {
     public partial class MainForm : Form
     {
-        List<Question> questions;
-        
-        Random random = new Random();
+        List<Question> questions = Question.ListToQuestions();
+        const string questionFileName = "Questions.txt";
+        const string statisticsFileName = "Statistics.txt";
+        readonly Random random = new Random();
+        User user;
         int randomQuestionIndex;
         decimal questionNumberCounter = 1;
+
+
         public MainForm()
         {
             InitializeComponent();
         }
-
         public void MainForm_Load(object sender, EventArgs e)
         {
+            Initialization();
             GetUserName();
-            questions = Question.ListToQuestions();
+            user = GetNameFromUser.user;
             PrintNextQuestion();
+        }
+
+        public static void Initialization()
+        {
+            var questions = Question.ListToQuestions();
+            int i = 0;
+            if (File.Exists(Path.Combine(FileSystem.docPath, statisticsFileName)) != true)
+            {
+                using (File.Create(Path.Combine(FileSystem.docPath, statisticsFileName)))
+                { }
+            }
+            if (File.Exists(Path.Combine(FileSystem.docPath, questionFileName)) != true)
+            {
+                using (File.Create(Path.Combine(FileSystem.docPath, questionFileName)))
+                { }
+                while (i != questions.Count)
+                {
+                    var question = questions[i].Text + '$' + questions[i].Answer;
+                    FileSystem.SaveString(question, questionFileName);
+                    i++;
+                }
+            }
         }
         private void GetUserName()
         {
@@ -32,14 +60,22 @@ namespace GeniyIdiotWindowsFormsApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var user = GetNameFromUser.user;
-            var userAnswer = int.Parse(questionAnswerTextBox.Text);
+            if (!int.TryParse(questionAnswerTextBox.Text, out int userAnswer))
+            {
+                MessageBox.Show("Введите ответ!");
+                return;
+            }
             var rightAnswer = questions[randomQuestionIndex].Answer;
             if (userAnswer == rightAnswer)
             {
-                 user.RightAnswers++;
+                user.RightAnswers++;
             }
             questions.Remove(questions[randomQuestionIndex]);
+            if (questions.Count == 0)
+            {
+                FinishGame();
+                return;
+            }
             PrintNextQuestion();
         }
 
@@ -48,39 +84,9 @@ namespace GeniyIdiotWindowsFormsApp
             randomQuestionIndex = random.Next(questions.Count);
             questionNum.Text = "Вопрос №" + questionNumberCounter;
             questionTextLabel.Text = questions[randomQuestionIndex].Print();
-            questionNumberCounter = questionNumberCounter + 1;
+            questionNumberCounter += 1;
+            questionAnswerTextBox.Text = "";
         }
-
-        private void questionTextLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void questionAnswerTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void questionNum_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void questionAnswerTextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            char number = e.KeyChar;
-
-            if (!Char.IsDigit(number))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void userName_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void новаяИграToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Restart();
@@ -90,5 +96,52 @@ namespace GeniyIdiotWindowsFormsApp
         {
             Application.Exit();
         }
+
+        public void показатьСтатистикуToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var newForm = new StatisticsForm();
+            newForm.ShowDialog();
+        }
+
+        private void добавитьВопросToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var questionForm = new QuestionsForm();
+            questionForm.ShowDialog();
+        }
+
+        private void удалитьПользовательскиеВопросыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            File.Delete(Path.Combine(FileSystem.docPath, questionFileName));
+            MessageBox.Show("Приложение будет перезапущенно!");
+            Application.Restart();
+        }
+
+        private void открытьФайлВопросовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start(Path.Combine(FileSystem.docPath, questionFileName));
+        }
+
+        private void очиститьСтатистикуToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            File.Delete(Path.Combine(FileSystem.docPath, statisticsFileName));
+            MessageBox.Show("Приложение будет перезапущенно!");
+            Application.Restart();
+        }
+
+        private void открытьФайлСтатистикиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start(Path.Combine(FileSystem.docPath, statisticsFileName));
+        }
+        private void FinishGame()
+        {
+            button1.Enabled = false;
+            var resultDiagnose = Diagnose.CalculateDiagnose(user, 5);
+            user.Diagnose = resultDiagnose;
+            var result = $"Число правильных ответов: {user.RightAnswers} \n {user.Name}, Ваш диагноз: {user.Diagnose.Name}";
+            MessageBox.Show(result);
+            FileSystem.SaveString(user.Name + '$' + user.RightAnswers + '$' + user.Diagnose.Name, statisticsFileName);
+        }
+        
+
     }
 }

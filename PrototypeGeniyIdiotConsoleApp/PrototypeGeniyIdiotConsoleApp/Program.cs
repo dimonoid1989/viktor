@@ -4,7 +4,7 @@ using System.IO;
 
 namespace PrototypeGeniyIdiotConsoleApp
 {
-    class Program
+    public class Program
     {
         const string questionFileName = "Questions.txt";
         const string statisticsFileName = "Statistics.txt";

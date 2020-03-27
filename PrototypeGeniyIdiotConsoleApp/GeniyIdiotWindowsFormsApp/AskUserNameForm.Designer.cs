@@ -41,7 +41,7 @@
             this.askUserName.Size = new System.Drawing.Size(152, 13);
             this.askUserName.TabIndex = 0;
             this.askUserName.Text = "Спросить имя пользователя";
-            this.askUserName.Click += new System.EventHandler(this.label1_Click);
+            
             // 
             // writeUserName
             // 
@@ -50,7 +50,7 @@
             this.writeUserName.Size = new System.Drawing.Size(159, 20);
             this.writeUserName.TabIndex = 1;
             this.writeUserName.Text = "Записать имя пользователя";
-            this.writeUserName.TextChanged += new System.EventHandler(this.writeUserName_TextChanged);
+           
             // 
             // enterName
             // 

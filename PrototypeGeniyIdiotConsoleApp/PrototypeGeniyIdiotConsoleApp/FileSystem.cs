@@ -4,7 +4,7 @@ using System.IO;
 
 namespace PrototypeGeniyIdiotConsoleApp
 {
-    class FileSystem
+    public class FileSystem
     {
          public static string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         
