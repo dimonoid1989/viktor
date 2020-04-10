@@ -2,7 +2,7 @@
 using System.IO;
 
 
-namespace PrototypeGeniyIdiotConsoleApp
+namespace ClassLibraryGiniyIdiot
 {
     public class FileSystem
     {
