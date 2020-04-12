@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using PrototypeGeniyIdiotConsoleApp;
+using ClassLibraryGiniyIdiot;
 
 namespace GeniyIdiotWindowsFormsApp
 {
@@ -21,14 +21,7 @@ namespace GeniyIdiotWindowsFormsApp
             for (int i = 0; i < SplitedStrings.Length; i++)
             {
                 var splitedWord = SplitedStrings[i].Split('$');
-                for (int j = 0; j < splitedWord.Length; j++)
-                {
-                    var label1 = new Label();
-                    label1.Location = new System.Drawing.Point(10 * i, 10 * j);
-                    label1.Text = splitedWord[j];
-                    this.Controls.Add(label1);
-                    label1.Name = "label" + j;
-                }
+                dataGridView1.Rows.Add(splitedWord[0], splitedWord[1], splitedWord[2]);
             }
         }
     }

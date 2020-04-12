@@ -2,7 +2,7 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using PrototypeGeniyIdiotConsoleApp;
+using ClassLibraryGiniyIdiot;
 using System.Diagnostics;
 
 namespace GeniyIdiotWindowsFormsApp

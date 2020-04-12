@@ -28,18 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.questionFormTextBox = new System.Windows.Forms.TextBox();
+            this.questionTextBox = new System.Windows.Forms.TextBox();
             this.questionQuestionFormButton = new System.Windows.Forms.Button();
             this.questionFormLabel = new System.Windows.Forms.Label();
-            this.answerQuestionFormButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.answeTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // questionFormTextBox
+            // questionTextBox
             // 
-            this.questionFormTextBox.Location = new System.Drawing.Point(70, 121);
-            this.questionFormTextBox.Name = "questionFormTextBox";
-            this.questionFormTextBox.Size = new System.Drawing.Size(100, 20);
-            this.questionFormTextBox.TabIndex = 0;
+            this.questionTextBox.Location = new System.Drawing.Point(70, 121);
+            this.questionTextBox.Name = "questionTextBox";
+            this.questionTextBox.Size = new System.Drawing.Size(100, 20);
+            this.questionTextBox.TabIndex = 0;
             // 
             // questionQuestionFormButton
             // 
@@ -56,29 +57,36 @@
             this.questionFormLabel.AutoSize = true;
             this.questionFormLabel.Location = new System.Drawing.Point(67, 68);
             this.questionFormLabel.Name = "questionFormLabel";
-            this.questionFormLabel.Size = new System.Drawing.Size(57, 13);
+            this.questionFormLabel.Size = new System.Drawing.Size(88, 13);
             this.questionFormLabel.TabIndex = 2;
-            this.questionFormLabel.Text = "Действие";
+            this.questionFormLabel.Text = "Введите вопрос";
             // 
-            // answerQuestionFormButton
+            // label1
             // 
-            this.answerQuestionFormButton.Location = new System.Drawing.Point(70, 178);
-            this.answerQuestionFormButton.Name = "answerQuestionFormButton";
-            this.answerQuestionFormButton.Size = new System.Drawing.Size(75, 23);
-            this.answerQuestionFormButton.TabIndex = 3;
-            this.answerQuestionFormButton.Text = "Отправить";
-            this.answerQuestionFormButton.UseVisualStyleBackColor = true;
-            this.answerQuestionFormButton.Click += new System.EventHandler(this.answerQuestionFormButton_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(281, 67);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Введите ответ";
+            // 
+            // answeTextBox
+            // 
+            this.answeTextBox.Location = new System.Drawing.Point(284, 121);
+            this.answeTextBox.Name = "answeTextBox";
+            this.answeTextBox.Size = new System.Drawing.Size(100, 20);
+            this.answeTextBox.TabIndex = 5;
             // 
             // QuestionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(240, 272);
-            this.Controls.Add(this.answerQuestionFormButton);
+            this.ClientSize = new System.Drawing.Size(447, 272);
+            this.Controls.Add(this.answeTextBox);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.questionFormLabel);
             this.Controls.Add(this.questionQuestionFormButton);
-            this.Controls.Add(this.questionFormTextBox);
+            this.Controls.Add(this.questionTextBox);
             this.Name = "QuestionsForm";
             this.Text = "QuestionsForm";
             this.ResumeLayout(false);
@@ -88,9 +96,10 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox questionFormTextBox;
+        private System.Windows.Forms.TextBox questionTextBox;
         private System.Windows.Forms.Button questionQuestionFormButton;
         private System.Windows.Forms.Label questionFormLabel;
-        private System.Windows.Forms.Button answerQuestionFormButton;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox answeTextBox;
     }
 }

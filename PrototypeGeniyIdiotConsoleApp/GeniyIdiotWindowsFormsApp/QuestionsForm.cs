@@ -1,4 +1,4 @@
-﻿using PrototypeGeniyIdiotConsoleApp;
+﻿using ClassLibraryGiniyIdiot;
 using System;
 using System.Windows.Forms;
 
@@ -11,33 +11,18 @@ namespace GeniyIdiotWindowsFormsApp
         public QuestionsForm()
         {
             InitializeComponent();
-            QuestionForm_Load();
-        }
-        public void QuestionForm_Load()
-        {
-            questionFormLabel.Text = "Введите вопрос";
-            answerQuestionFormButton.Enabled = false;
-            answerQuestionFormButton.Visible = false;
-
         }
         public void questionFormbutton_Click(object sender, EventArgs e)
         {
-            if (questionFormTextBox.Text == "")
+            if (questionTextBox.Text == "" || answeTextBox.Text =="")
             {
-                MessageBox.Show("Введите вопрос!");
+                MessageBox.Show("Заполните поля\"вопрос-ответ\"!");
                 return;
             }
-            question = questionFormTextBox.Text;
-            questionFormLabel.Text = "Введите ответ";
-            answerQuestionFormButton.Enabled = true;
-            answerQuestionFormButton.Visible = true;
-        }
-
-        public void answerQuestionFormButton_Click(object sender, EventArgs e)
-        {
-            answer = questionFormTextBox.Text;
+            question = questionTextBox.Text;
+            answer = answeTextBox.Text;
             FileSystem.SaveString(question + '$' + answer, "Questions.txt");
-            MessageBox.Show("Вопрос добавлен и сохранен");
+            MessageBox.Show("Вопрос доавлен и сохранен!");
             Close();
         }
     }
