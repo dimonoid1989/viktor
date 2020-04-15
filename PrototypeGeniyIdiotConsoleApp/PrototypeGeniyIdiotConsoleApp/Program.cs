@@ -26,7 +26,6 @@ namespace PrototypeGeniyIdiotConsoleApp
                         var userAnswer = TryGetUserAnswer();
                         game.CheckAnswer(userAnswer);
                     }
-                   
                     Console.WriteLine(game.RightAnswersResult());
                     Console.WriteLine(game.DiagnoseResult());
                     game.SaveResultInMyDocuments();

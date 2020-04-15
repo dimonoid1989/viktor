@@ -6,24 +6,27 @@ namespace GeniyIdiotWindowsFormsApp
 {
     public partial class QuestionsForm : Form
     {
-        string question;
-        string answer;
-        public QuestionsForm()
+        string text;
+        int answer;
+        Game game;
+        public QuestionsForm(Game game)
         {
             InitializeComponent();
+            this.game = game;
         }
         public void questionFormbutton_Click(object sender, EventArgs e)
         {
-            if (questionTextBox.Text == "" || answeTextBox.Text =="")
+            if (questionTextBox.Text == "" || answerTextBox.Text =="")
             {
                 MessageBox.Show("Заполните поля\"вопрос-ответ\"!");
                 return;
             }
-            question = questionTextBox.Text;
-            answer = answeTextBox.Text;
-            FileSystem.SaveString(question + '$' + answer, "Questions.txt");
-            MessageBox.Show("Вопрос доавлен и сохранен!");
+            text = questionTextBox.Text;
+            answer = Convert.ToInt32(answerTextBox.Text);
+            game.SaveQuestion(new Question(text,answer));
+            MessageBox.Show("Вопрос добавлен и сохранен!");
             Close();
         }
+       
     }
 }

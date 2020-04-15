@@ -42,7 +42,6 @@ namespace ClassLibraryGiniyIdiot
             }
             beginCountQuestions = questions.Count;
         }
-
         public List<Question> ReadQuestions()
         {
             questions = new List<Question> { };
@@ -59,11 +58,6 @@ namespace ClassLibraryGiniyIdiot
             }
             return questions;
         }
-        public void SaveResultInMyDocuments()
-        {
-            FileSystem.SaveString(user.Name + '$' + user.RightAnswers + '$' + user.Diagnose.Name, statisticsFileName);
-        }
-
         public Question GetQuestion()
         {
             var randomQuestionIndex = random.Next(questions.Count);
@@ -92,6 +86,10 @@ namespace ClassLibraryGiniyIdiot
             var resultDiagnose = Diagnose.CalculateDiagnose(user, beginCountQuestions);
             user.Diagnose = resultDiagnose;
             return $"{user.Name}, Ваш диагноз: {user.Diagnose.Name}";
+        }
+        public void SaveResultInMyDocuments()
+        {
+            FileSystem.SaveString(user.Name + '$' + user.RightAnswers + '$' + user.Diagnose.Name, statisticsFileName);
         }
         public string[] ReadStatistics()
         {

@@ -32,7 +32,7 @@
             this.questionQuestionFormButton = new System.Windows.Forms.Button();
             this.questionFormLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.answeTextBox = new System.Windows.Forms.TextBox();
+            this.answerTextBox = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
             // questionTextBox
@@ -70,19 +70,20 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Введите ответ";
             // 
-            // answeTextBox
+            // answerTextBox
             // 
-            this.answeTextBox.Location = new System.Drawing.Point(284, 121);
-            this.answeTextBox.Name = "answeTextBox";
-            this.answeTextBox.Size = new System.Drawing.Size(100, 20);
-            this.answeTextBox.TabIndex = 5;
+            this.answerTextBox.Location = new System.Drawing.Point(284, 121);
+            this.answerTextBox.Mask = "00000";
+            this.answerTextBox.Name = "answerTextBox";
+            this.answerTextBox.Size = new System.Drawing.Size(100, 20);
+            this.answerTextBox.TabIndex = 6;
             // 
             // QuestionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(447, 272);
-            this.Controls.Add(this.answeTextBox);
+            this.Controls.Add(this.answerTextBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.questionFormLabel);
             this.Controls.Add(this.questionQuestionFormButton);
@@ -100,6 +101,6 @@
         private System.Windows.Forms.Button questionQuestionFormButton;
         private System.Windows.Forms.Label questionFormLabel;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox answeTextBox;
+        private System.Windows.Forms.MaskedTextBox answerTextBox;
     }
 }
