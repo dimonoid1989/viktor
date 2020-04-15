@@ -5,7 +5,7 @@ namespace PrototypeGeniyIdiotConsoleApp
 {
     public class Program
     {
-        Game game;
+        static Game game;
         public static void Main(string[] args)
         {
             while (true)
@@ -16,7 +16,7 @@ namespace PrototypeGeniyIdiotConsoleApp
                 {
                     Console.WriteLine("Как Вас зовут?");
                     var user = new User(Console.ReadLine());
-                    var game = new Game(user);
+                    game = new Game(user);
                     var questions = game.ReadQuestions();
                     
                     while (questions.Count > 0)
@@ -59,7 +59,7 @@ namespace PrototypeGeniyIdiotConsoleApp
             yes = CheckAnswer(Console.ReadLine());
             if (yes)
             {
-                AddQuestionFlow();
+                game.SaveQuestion(AddQuestionFlow());
                 return true;
             }
             return false;
@@ -83,7 +83,7 @@ namespace PrototypeGeniyIdiotConsoleApp
         {
             Console.WriteLine("{0,-20}{1,-40}{2,-15}", "Имя:", "Кол-во правильных ответов:", "Диагноз:");
             Console.WriteLine("____________________________________________________________________");
-            var SplitedStrings = Game.ReadStatistics();
+            var SplitedStrings = game.ReadStatistics();
             for (int i = 0; i < SplitedStrings.Length; i++)
             {
                 var splitedWord = SplitedStrings[i].Split('$');
@@ -92,13 +92,13 @@ namespace PrototypeGeniyIdiotConsoleApp
                 Console.WriteLine();
             }
         }
-        public static void AddQuestionFlow()
+        public static Question AddQuestionFlow()
         {
             Console.WriteLine("Введите новый вопрос");
-            var question = Console.ReadLine();
+            var text = Console.ReadLine();
             Console.WriteLine("Введите ответ на вопрос");
             var answer = TryGetUserAnswer();
-            FileSystem.SaveString(question + '$' + answer, Game.questionFileName);
+            return new Question(text, answer);
         }
     }
 }

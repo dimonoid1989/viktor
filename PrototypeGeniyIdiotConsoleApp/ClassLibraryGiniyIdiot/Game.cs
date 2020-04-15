@@ -93,12 +93,14 @@ namespace ClassLibraryGiniyIdiot
             user.Diagnose = resultDiagnose;
             return $"{user.Name}, Ваш диагноз: {user.Diagnose.Name}";
         }
-        public static string[] ReadStatistics()
+        public string[] ReadStatistics()
         {
             var result = FileSystem.GetString(statisticsFileName);
             string[] delimeter = new string[1];
             delimeter[0] = "\r\n";
             return result.Split(delimeter, StringSplitOptions.RemoveEmptyEntries);
         }
+        public void SaveQuestion(Question question)
+        { FileSystem.SaveString(question.Text + '$' + question.Answer, questionFileName); }
     }
 }
