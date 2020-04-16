@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.questionTextLabel = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.nextQuestionButton = new System.Windows.Forms.Button();
             this.questionNum = new System.Windows.Forms.Label();
             this.userName = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -63,15 +63,15 @@
             this.questionTextLabel.TabIndex = 0;
             this.questionTextLabel.Text = "Текст вопроса";
             // 
-            // button1
+            // nextQuestionButton
             // 
-            this.button1.Location = new System.Drawing.Point(54, 166);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(112, 29);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Далее";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.nextQuestionButton.Location = new System.Drawing.Point(54, 166);
+            this.nextQuestionButton.Name = "nextQuestionButton";
+            this.nextQuestionButton.Size = new System.Drawing.Size(112, 29);
+            this.nextQuestionButton.TabIndex = 2;
+            this.nextQuestionButton.Text = "Далее";
+            this.nextQuestionButton.UseVisualStyleBackColor = true;
+            this.nextQuestionButton.Click += new System.EventHandler(this.button1_Click);
             // 
             // questionNum
             // 
@@ -116,19 +116,19 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(133, 6);
             // 
             // новаяИграToolStripMenuItem
             // 
             this.новаяИграToolStripMenuItem.Name = "новаяИграToolStripMenuItem";
-            this.новаяИграToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.новаяИграToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.новаяИграToolStripMenuItem.Text = "Новая игра";
             this.новаяИграToolStripMenuItem.Click += new System.EventHandler(this.новаяИграToolStripMenuItem_Click);
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.выходToolStripMenuItem.Text = "Выход";
             this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
             // 
@@ -222,7 +222,7 @@
             this.Controls.Add(this.questionAnswerTextBox);
             this.Controls.Add(this.userName);
             this.Controls.Add(this.questionNum);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.nextQuestionButton);
             this.Controls.Add(this.questionTextLabel);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -239,7 +239,7 @@
         #endregion
 
         private System.Windows.Forms.Label questionTextLabel;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button nextQuestionButton;
         private System.Windows.Forms.Label questionNum;
         public System.Windows.Forms.Label userName;
         private System.Windows.Forms.ToolTip toolTip1;

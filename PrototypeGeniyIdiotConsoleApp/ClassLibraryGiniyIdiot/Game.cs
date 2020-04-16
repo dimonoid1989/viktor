@@ -19,26 +19,16 @@ namespace ClassLibraryGiniyIdiot
         {
             this.user = user;
             Initialization();
+
         }
         public void Initialization()
         {
             var questions = Question.ListToQuestions();
-            int i = 0;
-            if (File.Exists(Path.Combine(FileSystem.docPath, statisticsFileName)) != true)
+            FileSystem.InitializeQuestionsAndStatistics();
+            foreach (Question question in questions)
             {
-                using (File.Create(Path.Combine(FileSystem.docPath, statisticsFileName)))
-                { }
-            }
-            if (File.Exists(Path.Combine(FileSystem.docPath, questionFileName)) != true)
-            {
-                using (File.Create(Path.Combine(FileSystem.docPath, questionFileName)))
-                { }
-                while (i != questions.Count)
-                {
-                    var question = questions[i].Text + '$' + questions[i].Answer;
-                    FileSystem.SaveString(question, questionFileName);
-                    i++;
-                }
+                var questionSave = question.Text + '$' + question.Answer;
+                FileSystem.SaveString(questionSave, questionFileName);
             }
             beginCountQuestions = questions.Count;
         }
@@ -65,7 +55,7 @@ namespace ClassLibraryGiniyIdiot
             questions.Remove(questions[randomQuestionIndex]);
             return currentQuestion;
         }
-        public string QuestionNum()
+        public string GetQuestionNumber()
         {
             questionNumber++;
             return "Вопрос №" + questionNumber;
@@ -76,6 +66,10 @@ namespace ClassLibraryGiniyIdiot
             {
                 user.RightAnswers++;
             }
+        }
+        public bool IsEnd()
+        {
+            return questions.Count > 0;
         }
         public string RightAnswersResult()
         {

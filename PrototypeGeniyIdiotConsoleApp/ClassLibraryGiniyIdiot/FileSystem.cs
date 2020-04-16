@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 
 
 namespace ClassLibraryGiniyIdiot
@@ -17,6 +18,19 @@ namespace ClassLibraryGiniyIdiot
         {
             using (StreamReader outputFile = new StreamReader(Path.Combine(docPath, fileName)))
             { return outputFile.ReadToEnd(); }
+        }
+        public static void InitializeQuestionsAndStatistics()
+        {
+            if (!File.Exists(Path.Combine(docPath, Game.statisticsFileName)))
+            {
+                using (File.Create(Path.Combine(docPath, Game.statisticsFileName)))
+                { }
+            }
+            if (!File.Exists(Path.Combine(docPath, Game.questionFileName)))
+            {
+                using (File.Create(Path.Combine(docPath, Game.questionFileName)))
+                { }
+            }
         }
     }
 }

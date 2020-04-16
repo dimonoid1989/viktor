@@ -45,7 +45,7 @@ namespace GeniyIdiotWindowsFormsApp
         }
         void PrintNextQuestion()
         {
-            questionNum.Text = game.QuestionNum();
+            questionNum.Text = game.GetQuestionNumber();
             questionTextLabel.Text = game.GetQuestion().Print();
             questionAnswerTextBox.Text = "";
         }
@@ -89,7 +89,7 @@ namespace GeniyIdiotWindowsFormsApp
         }
         private void FinishGame()
         {
-            button1.Enabled = false;
+            nextQuestionButton.Enabled = false;
             var result = game.RightAnswersResult() +" \n "+ game.DiagnoseResult();
             MessageBox.Show(result);
             game.SaveResultInMyDocuments();

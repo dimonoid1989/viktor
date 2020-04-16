@@ -17,11 +17,11 @@ namespace PrototypeGeniyIdiotConsoleApp
                     Console.WriteLine("Как Вас зовут?");
                     var user = new User(Console.ReadLine());
                     game = new Game(user);
-                    var questions = game.ReadQuestions();
+                    game.ReadQuestions();
                     
-                    while (questions.Count > 0)
+                    while (game.IsEnd())
                     {
-                        Console.WriteLine(game.QuestionNum());
+                        Console.WriteLine(game.GetQuestionNumber());
                         Console.WriteLine(game.GetQuestion().Print());
                         var userAnswer = TryGetUserAnswer();
                         game.CheckAnswer(userAnswer);
