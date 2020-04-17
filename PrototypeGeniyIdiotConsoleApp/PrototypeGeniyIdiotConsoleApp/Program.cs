@@ -17,7 +17,7 @@ namespace PrototypeGeniyIdiotConsoleApp
                     Console.WriteLine("Как Вас зовут?");
                     var user = new User(Console.ReadLine());
                     game = new Game(user);
-                    while (game.IsEnd())
+                    while (!game.IsEnd())
                     {
                         Console.WriteLine(game.GetQuestionNumber());
                         Console.WriteLine(game.GetQuestion().Print());

@@ -19,21 +19,15 @@ namespace ClassLibraryGiniyIdiot
             using (StreamReader outputFile = new StreamReader(Path.Combine(docPath, fileName)))
             { return outputFile.ReadToEnd(); }
         }
-        public static bool InitializeQuestionsAndStatistics()
+        public static bool IsExist(string fileName)
         {
-            bool isNeedWriteQuestions = false;
-            if (!File.Exists(Path.Combine(docPath, Game.statisticsFileName)))
-            {
-                using (File.Create(Path.Combine(docPath, Game.statisticsFileName)))
-                { }
-            }
-            if (!File.Exists(Path.Combine(docPath, Game.questionFileName)))
-            {
-                using (File.Create(Path.Combine(docPath, Game.questionFileName)))
-                { }
-                isNeedWriteQuestions = true;
-            }
-            return isNeedWriteQuestions;
+           return File.Exists(Path.Combine(docPath, fileName));
         }
+        public static void CreateFile(string fileName)
+        {
+            using (File.Create(Path.Combine(docPath, fileName)))
+            { }
+        }
+
     }
 }

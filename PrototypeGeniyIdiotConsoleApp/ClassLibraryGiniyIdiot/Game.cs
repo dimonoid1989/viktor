@@ -24,13 +24,18 @@ namespace ClassLibraryGiniyIdiot
         public void Initialization()
         {
             var questions = Question.ListToQuestions();
-            if(FileSystem.InitializeQuestionsAndStatistics())
+            if (!FileSystem.IsExist(questionFileName))
             {
+                FileSystem.CreateFile(questionFileName);
                 foreach (Question question in questions)
                 {
                     var questionSave = question.Text + '$' + question.Answer;
                     FileSystem.SaveString(questionSave, questionFileName);
                 }
+            }
+            if (!FileSystem.IsExist(statisticsFileName))
+            {
+                FileSystem.CreateFile(statisticsFileName);
             }
         }
         public List<Question> ReadQuestions()
