@@ -10,7 +10,6 @@ namespace GeniyIdiotWindowsFormsApp
     public partial class MainForm : Form
     {
         static Game game;
-        List<Question> questions;
         public MainForm()
         {
             InitializeComponent();
@@ -19,7 +18,6 @@ namespace GeniyIdiotWindowsFormsApp
         {
             GetUserName();
             game = new Game(GetNameFromUser.user);
-            questions = game.ReadQuestions();
             PrintNextQuestion();
         }
         private void GetUserName()
@@ -36,7 +34,7 @@ namespace GeniyIdiotWindowsFormsApp
                 return;
             }
             game.CheckAnswer(userAnswer);
-            if (questions.Count == 0)
+            if (game.IsEnd())
             {
                 FinishGame();
                 return;

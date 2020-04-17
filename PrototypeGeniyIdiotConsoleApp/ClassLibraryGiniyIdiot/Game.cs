@@ -19,7 +19,7 @@ namespace ClassLibraryGiniyIdiot
         {
             this.user = user;
             Initialization();
-
+            ReadQuestions();
         }
         public void Initialization()
         {
@@ -71,7 +71,7 @@ namespace ClassLibraryGiniyIdiot
         }
         public bool IsEnd()
         {
-            return questions.Count > 0;
+            return questions.Count == 0;
         }
         public string RightAnswersResult()
         {
