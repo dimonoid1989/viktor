@@ -24,13 +24,14 @@ namespace ClassLibraryGiniyIdiot
         public void Initialization()
         {
             var questions = Question.ListToQuestions();
-            FileSystem.InitializeQuestionsAndStatistics();
-            foreach (Question question in questions)
+            if(FileSystem.InitializeQuestionsAndStatistics())
             {
-                var questionSave = question.Text + '$' + question.Answer;
-                FileSystem.SaveString(questionSave, questionFileName);
+                foreach (Question question in questions)
+                {
+                    var questionSave = question.Text + '$' + question.Answer;
+                    FileSystem.SaveString(questionSave, questionFileName);
+                }
             }
-            beginCountQuestions = questions.Count;
         }
         public List<Question> ReadQuestions()
         {
@@ -46,6 +47,7 @@ namespace ClassLibraryGiniyIdiot
                 var question = new Question(text, answer);
                 questions.Add(question);
             }
+            beginCountQuestions = questions.Count;
             return questions;
         }
         public Question GetQuestion()

@@ -19,8 +19,9 @@ namespace ClassLibraryGiniyIdiot
             using (StreamReader outputFile = new StreamReader(Path.Combine(docPath, fileName)))
             { return outputFile.ReadToEnd(); }
         }
-        public static void InitializeQuestionsAndStatistics()
+        public static bool InitializeQuestionsAndStatistics()
         {
+            bool isNeedWriteQuestions = false;
             if (!File.Exists(Path.Combine(docPath, Game.statisticsFileName)))
             {
                 using (File.Create(Path.Combine(docPath, Game.statisticsFileName)))
@@ -30,7 +31,9 @@ namespace ClassLibraryGiniyIdiot
             {
                 using (File.Create(Path.Combine(docPath, Game.questionFileName)))
                 { }
+                isNeedWriteQuestions = true;
             }
+            return isNeedWriteQuestions;
         }
     }
 }
