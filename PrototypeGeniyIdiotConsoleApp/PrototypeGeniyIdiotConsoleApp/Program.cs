@@ -82,12 +82,10 @@ namespace PrototypeGeniyIdiotConsoleApp
         {
             Console.WriteLine("{0,-20}{1,-40}{2,-15}", "Имя:", "Кол-во правильных ответов:", "Диагноз:");
             Console.WriteLine("____________________________________________________________________");
-            var SplitedStrings = game.ReadStatistics();
-            for (int i = 0; i < SplitedStrings.Length; i++)
+            var statisticObjectMassive = game.ReadStatistics();
+            foreach (var statistics in statisticObjectMassive)
             {
-                var splitedWord = SplitedStrings[i].Split('$');
-
-                Console.WriteLine("{0,-30}{1,-30}{2,-12}", splitedWord[0], splitedWord[1], splitedWord[2]);
+                Console.WriteLine("{0,-30}{1,-30}{2,-12}", statistics.Name, statistics.RightAnswers, statistics.Diagnose);
                 Console.WriteLine();
             }
         }

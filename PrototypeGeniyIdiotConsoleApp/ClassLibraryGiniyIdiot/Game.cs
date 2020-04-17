@@ -85,12 +85,20 @@ namespace ClassLibraryGiniyIdiot
         {
             FileSystem.SaveString(user.Name + '$' + user.RightAnswers + '$' + user.Diagnose.Name, statisticsFileName);
         }
-        public string[] ReadStatistics()
+        public Statistics[] ReadStatistics()
         {
             var result = FileSystem.GetString(statisticsFileName);
             string[] delimeter = new string[1];
             delimeter[0] = "\r\n";
-            return result.Split(delimeter, StringSplitOptions.RemoveEmptyEntries);
+            var splitedStrings = result.Split(delimeter, StringSplitOptions.RemoveEmptyEntries);
+            var mass = new Statistics[splitedStrings.Length];
+            for (int i = 0; i < splitedStrings.Length; i++)
+            {
+                var splitedWord = splitedStrings[i].Split('$');
+                var statistics = new Statistics(splitedWord[0], splitedWord[1], splitedWord[2]);
+                mass[i] = statistics;
+            }
+            return mass;
         }
         public void SaveQuestion(Question question)
         { FileSystem.SaveString(question.Text + '$' + question.Answer, questionFileName); }

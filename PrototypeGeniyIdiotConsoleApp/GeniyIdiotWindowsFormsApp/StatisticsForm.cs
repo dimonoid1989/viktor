@@ -15,11 +15,10 @@ namespace GeniyIdiotWindowsFormsApp
 
         private void ShowStatistics()
         {
-            var SplitedStrings = game.ReadStatistics();
-            for (int i = 0; i < SplitedStrings.Length; i++)
+            var statisticObjectMassive = game.ReadStatistics();
+            foreach (var statistics in statisticObjectMassive)
             {
-                var splitedWord = SplitedStrings[i].Split('$');
-                dataGridView1.Rows.Add(splitedWord[0], splitedWord[1], splitedWord[2]);
+                dataGridView1.Rows.Add(statistics.Name, statistics.RightAnswers, statistics.Diagnose);
             }
         }
     }
