@@ -50,6 +50,7 @@ namespace GeniyIdiotWindowsFormsApp
         private void новаяИграToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Restart();
+
         }
         private void выходToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -73,7 +74,8 @@ namespace GeniyIdiotWindowsFormsApp
         }
         private void открытьФайлВопросовToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start(Path.Combine(FileSystem.docPath, Game.questionFileName));
+            var newForm = new QuestionViewForm(game);
+            newForm.ShowDialog();
         }
         private void очиститьСтатистикуToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -88,7 +90,7 @@ namespace GeniyIdiotWindowsFormsApp
         private void FinishGame()
         {
             nextQuestionButton.Enabled = false;
-            var result = game.RightAnswersResult() +" \n "+ game.DiagnoseResult();
+            var result = game.RightAnswersResult() + " \n " + game.DiagnoseResult();
             MessageBox.Show(result);
             game.SaveResultInMyDocuments();
         }

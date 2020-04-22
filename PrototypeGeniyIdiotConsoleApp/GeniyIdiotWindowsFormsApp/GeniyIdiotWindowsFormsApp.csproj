@@ -59,6 +59,12 @@
     <Compile Include="QuestionsForm.Designer.cs">
       <DependentUpon>QuestionsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuestionViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuestionViewForm.Designer.cs">
+      <DependentUpon>QuestionViewForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="StatisticsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +84,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="QuestionsForm.resx">
       <DependentUpon>QuestionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuestionViewForm.resx">
+      <DependentUpon>QuestionViewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StatisticsForm.resx">
       <DependentUpon>StatisticsForm.cs</DependentUpon>
