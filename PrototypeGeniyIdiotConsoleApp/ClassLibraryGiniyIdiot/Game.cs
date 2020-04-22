@@ -8,10 +8,10 @@ namespace ClassLibraryGiniyIdiot
     {
         public const string questionFileName = "Questions.txt";
         public const string statisticsFileName = "Statistics.txt";
-        int questionNumber = 0;
+        public int questionNumber = 0;
         List<Question> questions;
         Random random = new Random();
-        User user;
+        public User user;
         Question currentQuestion;
         int beginCountQuestions;
 

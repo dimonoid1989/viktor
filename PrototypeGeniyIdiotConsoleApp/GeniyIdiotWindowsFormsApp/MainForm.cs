@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using ClassLibraryGiniyIdiot;
 using System.Diagnostics;
@@ -13,6 +12,7 @@ namespace GeniyIdiotWindowsFormsApp
         public MainForm()
         {
             InitializeComponent();
+
         }
         public void MainForm_Load(object sender, EventArgs e)
         {
@@ -43,14 +43,17 @@ namespace GeniyIdiotWindowsFormsApp
         }
         void PrintNextQuestion()
         {
-            questionNum.Text = game.GetQuestionNumber();
+            questionNumber.Text = game.GetQuestionNumber();
             questionTextLabel.Text = game.GetQuestion().Print();
             questionAnswerTextBox.Text = "";
         }
         private void новаяИграToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.Restart();
-
+            // Application.Restart();
+            game.ReadQuestions();
+            game.questionNumber = 0;
+            game.user.RightAnswers = 0;
+            PrintNextQuestion();
         }
         private void выходToolStripMenuItem_Click(object sender, EventArgs e)
         {

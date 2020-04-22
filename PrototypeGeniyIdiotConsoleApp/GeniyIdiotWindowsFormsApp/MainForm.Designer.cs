@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.questionTextLabel = new System.Windows.Forms.Label();
             this.nextQuestionButton = new System.Windows.Forms.Button();
-            this.questionNum = new System.Windows.Forms.Label();
+            this.questionNumber = new System.Windows.Forms.Label();
             this.userName = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -75,12 +75,12 @@
             // 
             // questionNum
             // 
-            this.questionNum.AutoSize = true;
-            this.questionNum.Location = new System.Drawing.Point(54, 46);
-            this.questionNum.Name = "questionNum";
-            this.questionNum.Size = new System.Drawing.Size(84, 13);
-            this.questionNum.TabIndex = 3;
-            this.questionNum.Text = "номер вопроса";
+            this.questionNumber.AutoSize = true;
+            this.questionNumber.Location = new System.Drawing.Point(54, 46);
+            this.questionNumber.Name = "questionNum";
+            this.questionNumber.Size = new System.Drawing.Size(84, 13);
+            this.questionNumber.TabIndex = 3;
+            this.questionNumber.Text = "номер вопроса";
             // 
             // userName
             // 
@@ -221,7 +221,7 @@
             this.ClientSize = new System.Drawing.Size(530, 312);
             this.Controls.Add(this.questionAnswerTextBox);
             this.Controls.Add(this.userName);
-            this.Controls.Add(this.questionNum);
+            this.Controls.Add(this.questionNumber);
             this.Controls.Add(this.nextQuestionButton);
             this.Controls.Add(this.questionTextLabel);
             this.Controls.Add(this.menuStrip1);
@@ -240,7 +240,7 @@
 
         private System.Windows.Forms.Label questionTextLabel;
         private System.Windows.Forms.Button nextQuestionButton;
-        private System.Windows.Forms.Label questionNum;
+        private System.Windows.Forms.Label questionNumber;
         public System.Windows.Forms.Label userName;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.MenuStrip menuStrip1;
