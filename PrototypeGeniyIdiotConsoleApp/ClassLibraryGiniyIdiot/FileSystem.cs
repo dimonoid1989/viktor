@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 
 
 namespace ClassLibraryGiniyIdiot
@@ -10,7 +11,7 @@ namespace ClassLibraryGiniyIdiot
         
         public static void SaveString(string value, string fileName)
         {
-            using (StreamWriter outputFile = File.AppendText(Path.Combine(docPath, fileName)))
+            using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, fileName),true))
             { outputFile.WriteLine(value); }
         }
         public static string GetString(string fileName)
@@ -27,6 +28,9 @@ namespace ClassLibraryGiniyIdiot
             using (File.Create(Path.Combine(docPath, fileName)))
             { }
         }
-
+        public static void CleanFile(string fileName)
+        {
+            File.WriteAllText(Path.Combine(docPath, fileName), string.Empty);
+        }
     }
 }

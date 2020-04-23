@@ -9,7 +9,7 @@ namespace GeniyIdiotWindowsFormsApp
     public partial class QuestionViewForm : Form
     {
         Game game;
-        List <Question> questionsObjectMassive;
+        List <Question> questions;
         public QuestionViewForm(Game game)
         {
             InitializeComponent();
@@ -19,8 +19,8 @@ namespace GeniyIdiotWindowsFormsApp
 
         private void ShowQuestions()
         {
-            questionsObjectMassive = game.ReadQuestions();
-            foreach (var question in questionsObjectMassive)
+            questions = game.ReadQuestions();
+            foreach (var question in questions)
             {
                 questionView.Rows.Add(question.Text, question.Answer);
             }
@@ -29,14 +29,19 @@ namespace GeniyIdiotWindowsFormsApp
         private void deleteButton_Click(object sender, EventArgs e)
         {
             int rowIndex = questionView.CurrentRow.Index;
-            questionsObjectMassive.RemoveAt(rowIndex);
+            questions.RemoveAt(rowIndex);
             questionView.Rows.Remove(questionView.Rows[rowIndex]);
-            StreamWriter writer = new StreamWriter(Path.Combine(FileSystem.docPath, Game.questionFileName), false);
-            foreach (var question in questionsObjectMassive)
+            FileSystem.CleanFile(Game.questionFileName);
+            foreach (var question in questions)
             {
-                writer.WriteLine(question.Text + '$' + question.Answer);
+                FileSystem.SaveString(question.Text + '$' + question.Answer, Game.questionFileName);
             }
-            writer.Close();
+        }
+
+        private void QuestionViewForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MessageBox.Show("Для обработки изменений приложение будет принудительно перезапущенно", "Внимание!");
+            Application.Restart();
         }
     }
 }

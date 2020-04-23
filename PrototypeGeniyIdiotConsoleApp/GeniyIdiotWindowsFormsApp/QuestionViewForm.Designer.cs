@@ -41,7 +41,6 @@
             this.questionView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.questionText,
             this.questionAnswer});
-            this.questionView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.questionView.Location = new System.Drawing.Point(0, 0);
             this.questionView.Name = "questionView";
             this.questionView.Size = new System.Drawing.Size(676, 323);
@@ -74,8 +73,11 @@
             this.ClientSize = new System.Drawing.Size(676, 323);
             this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.questionView);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "QuestionViewForm";
             this.Text = "QuestionViewForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.QuestionViewForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.questionView)).EndInit();
             this.ResumeLayout(false);
 

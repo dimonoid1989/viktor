@@ -82,9 +82,8 @@ namespace GeniyIdiotWindowsFormsApp
         }
         private void очиститьСтатистикуToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            File.Delete(Path.Combine(FileSystem.docPath, Game.statisticsFileName));
-            MessageBox.Show("Приложение будет перезапущенно!");
-            Application.Restart();
+            FileSystem.CleanFile(Game.statisticsFileName);
+            MessageBox.Show("Информация о предыдущих играх удалена");
         }
         private void открытьФайлСтатистикиToolStripMenuItem_Click(object sender, EventArgs e)
         {

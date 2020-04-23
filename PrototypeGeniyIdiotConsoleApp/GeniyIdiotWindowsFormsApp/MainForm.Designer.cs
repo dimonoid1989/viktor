@@ -73,11 +73,11 @@
             this.nextQuestionButton.UseVisualStyleBackColor = true;
             this.nextQuestionButton.Click += new System.EventHandler(this.button1_Click);
             // 
-            // questionNum
+            // questionNumber
             // 
             this.questionNumber.AutoSize = true;
             this.questionNumber.Location = new System.Drawing.Point(54, 46);
-            this.questionNumber.Name = "questionNum";
+            this.questionNumber.Name = "questionNumber";
             this.questionNumber.Size = new System.Drawing.Size(84, 13);
             this.questionNumber.TabIndex = 3;
             this.questionNumber.Text = "номер вопроса";
@@ -183,27 +183,27 @@
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(270, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(256, 6);
             // 
             // добавитьВопросToolStripMenuItem
             // 
             this.добавитьВопросToolStripMenuItem.Name = "добавитьВопросToolStripMenuItem";
-            this.добавитьВопросToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
+            this.добавитьВопросToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
             this.добавитьВопросToolStripMenuItem.Text = "Добавить вопрос";
             this.добавитьВопросToolStripMenuItem.Click += new System.EventHandler(this.добавитьВопросToolStripMenuItem_Click);
             // 
             // удалитьПользовательскиеВопросыToolStripMenuItem
             // 
             this.удалитьПользовательскиеВопросыToolStripMenuItem.Name = "удалитьПользовательскиеВопросыToolStripMenuItem";
-            this.удалитьПользовательскиеВопросыToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
-            this.удалитьПользовательскиеВопросыToolStripMenuItem.Text = "Удалить пользовательские вопросы";
+            this.удалитьПользовательскиеВопросыToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+            this.удалитьПользовательскиеВопросыToolStripMenuItem.Text = "Возврат вопросов по умолчанию";
             this.удалитьПользовательскиеВопросыToolStripMenuItem.Click += new System.EventHandler(this.удалитьПользовательскиеВопросыToolStripMenuItem_Click);
             // 
             // открытьФайлВопросовToolStripMenuItem
             // 
             this.открытьФайлВопросовToolStripMenuItem.Name = "открытьФайлВопросовToolStripMenuItem";
-            this.открытьФайлВопросовToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
-            this.открытьФайлВопросовToolStripMenuItem.Text = "Открыть файл вопросов";
+            this.открытьФайлВопросовToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+            this.открытьФайлВопросовToolStripMenuItem.Text = "Показать вопросы";
             this.открытьФайлВопросовToolStripMenuItem.Click += new System.EventHandler(this.открытьФайлВопросовToolStripMenuItem_Click);
             // 
             // questionAnswerTextBox
