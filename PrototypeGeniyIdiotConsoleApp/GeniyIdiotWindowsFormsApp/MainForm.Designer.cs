@@ -52,6 +52,7 @@
             this.questionAnswerTextBox = new System.Windows.Forms.MaskedTextBox();
             this.questionTimer = new System.Windows.Forms.Timer(this.components);
             this.questionTimerView = new System.Windows.Forms.ProgressBar();
+            this.timerProgressBar = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -228,6 +229,10 @@
             this.questionTimerView.Size = new System.Drawing.Size(368, 23);
             this.questionTimerView.TabIndex = 7;
             // 
+            // timerProgressBar
+            // 
+            this.timerProgressBar.Interval = 1000;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -276,6 +281,7 @@
         private System.Windows.Forms.MaskedTextBox questionAnswerTextBox;
         private System.Windows.Forms.Timer questionTimer;
         private System.Windows.Forms.ProgressBar questionTimerView;
+        private System.Windows.Forms.Timer timerProgressBar;
     }
 }
 

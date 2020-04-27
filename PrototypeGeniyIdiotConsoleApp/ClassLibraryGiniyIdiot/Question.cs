@@ -6,11 +6,13 @@ namespace ClassLibraryGiniyIdiot
     {
         public string Text;
         public int Answer;
+        public int Difficulty;
 
-        public Question(string text, int answer)
+        public Question(string text, int answer, int difficulty = 1)
         {
             Text = text;
             Answer = answer;
+            Difficulty = difficulty;
         }
 
         public string Print()

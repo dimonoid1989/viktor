@@ -21,8 +21,7 @@ namespace GeniyIdiotWindowsFormsApp
             game = new Game(GetNameFromUser.user);
             PrintNextQuestion();
             ProgressTimer();
-            questionTimer.Start();
-            
+            StartCountTimers();
         }
         private void GetUserName()
         {
@@ -43,25 +42,27 @@ namespace GeniyIdiotWindowsFormsApp
                 FinishGame();
                 return;
             }
-            questionTimer.Stop();
+            StopCountTimers();
             PrintNextQuestion();
             questionTimerView.Value = 0;
-            questionTimer.Start();
+            StartCountTimers();
         }
         void PrintNextQuestion()
         {
             questionNumber.Text = game.GetQuestionNumber();
             questionTextLabel.Text = game.GetQuestion().Print();
             questionAnswerTextBox.Text = "";
-            questionTimer.Start();
         }
         private void новаяИграToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Application.Restart();
+            StopCountTimers();
             game.ReadQuestions();
             game.questionNumber = 0;
             game.user.RightAnswers = 0;
+            questionTimerView.Value = 0;
             PrintNextQuestion();
+            StartCountTimers();
         }
         private void выходToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -69,13 +70,17 @@ namespace GeniyIdiotWindowsFormsApp
         }
         public void показатьСтатистикуToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            StopCountTimers();
             var newForm = new StatisticsForm(game);
             newForm.ShowDialog();
+            StartCountTimers();
         }
         private void добавитьВопросToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            StopCountTimers();
             var questionForm = new QuestionsForm(game);
             questionForm.ShowDialog();
+            StartCountTimers();
         }
         private void удалитьПользовательскиеВопросыToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -85,22 +90,27 @@ namespace GeniyIdiotWindowsFormsApp
         }
         private void открытьФайлВопросовToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            StopCountTimers();
             var newForm = new QuestionViewForm(game);
             newForm.ShowDialog();
+            StartCountTimers();
         }
         private void очиститьСтатистикуToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            StopCountTimers();
             FileSystem.CleanFile(Game.statisticsFileName);
             MessageBox.Show("Информация о предыдущих играх удалена");
+            StartCountTimers();
         }
         private void открытьФайлСтатистикиToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            StopCountTimers();
             Process.Start(Path.Combine(FileSystem.docPath, Game.statisticsFileName));
+            StartCountTimers();
         }
         private void FinishGame()
         {
-            nextQuestionButton.Enabled = false;
-            questionTimer.Stop();
+            StopCountTimers();
             var result = game.RightAnswersResult() + " \n " + game.DiagnoseResult();
             MessageBox.Show(result);
             game.SaveResultInMyDocuments();
@@ -109,7 +119,6 @@ namespace GeniyIdiotWindowsFormsApp
         private void questionTimer_Tick(object sender, EventArgs e)
         {
             questionTimer.Stop();
-            questionTimerView.Enabled = false;
             MessageBox.Show("К сожалению, время на ответ вышло");
             PrintNextQuestion();
             game.beginCountQuestions++;
@@ -119,14 +128,21 @@ namespace GeniyIdiotWindowsFormsApp
         public void ProgressTimer()
         {
             questionTimerView.Value = 0;
-            Timer timer = new Timer();
-            timer.Interval = 1000;
-            timer.Enabled = true;
-            timer.Tick += timer_Tick;
+            timerProgressBar.Tick += timer_Tick;
             void timer_Tick(object sender, EventArgs e)
             {
                questionTimerView.PerformStep();
             }
+        }
+        public void StopCountTimers()
+        {
+            questionTimer.Stop();
+            timerProgressBar.Stop();
+        }
+        public void StartCountTimers()
+        {
+            questionTimer.Start();
+            timerProgressBar.Start();
         }
     }
 }

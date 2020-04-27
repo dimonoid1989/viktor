@@ -49,7 +49,8 @@ namespace ClassLibraryGiniyIdiot
                 var splitedWord = splitedStrings[i].Split('$');
                 var text = splitedWord[0];
                 var answer = Convert.ToInt32(splitedWord[1]);
-                var question = new Question(text, answer);
+                var difficulty = Convert.ToInt32(splitedWord[2]);
+                var question = new Question(text, answer, difficulty);
                 questions.Add(question);
             }
             beginCountQuestions = questions.Count;
@@ -108,10 +109,7 @@ namespace ClassLibraryGiniyIdiot
             return mass;
         }
         public void SaveQuestion(Question question)
-        { FileSystem.SaveString(question.Text + '$' + question.Answer, questionFileName); }
-        public void Timer()
-        {
-            
-        }
+        { FileSystem.SaveString(question.Text + '$' + question.Answer + '$' + question.Difficulty, questionFileName); }
+       
     }
 }

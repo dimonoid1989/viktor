@@ -22,7 +22,7 @@ namespace GeniyIdiotWindowsFormsApp
             questions = game.ReadQuestions();
             foreach (var question in questions)
             {
-                questionView.Rows.Add(question.Text, question.Answer);
+                questionView.Rows.Add(question.Text, question.Answer, question.Difficulty);
             }
         }
 
@@ -34,7 +34,7 @@ namespace GeniyIdiotWindowsFormsApp
             FileSystem.CleanFile(Game.questionFileName);
             foreach (var question in questions)
             {
-                FileSystem.SaveString(question.Text + '$' + question.Answer, Game.questionFileName);
+                FileSystem.SaveString(question.Text + '$' + question.Answer + '$' + question.Difficulty, Game.questionFileName);
             }
         }
 

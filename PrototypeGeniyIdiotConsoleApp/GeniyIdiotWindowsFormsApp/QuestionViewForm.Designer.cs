@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             this.questionView = new System.Windows.Forms.DataGridView();
+            this.deleteButton = new System.Windows.Forms.Button();
             this.questionText = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.questionAnswer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deleteButton = new System.Windows.Forms.Button();
+            this.questionDifficulty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.questionView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -40,11 +41,22 @@
             this.questionView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.questionView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.questionText,
-            this.questionAnswer});
+            this.questionAnswer,
+            this.questionDifficulty});
             this.questionView.Location = new System.Drawing.Point(0, 0);
             this.questionView.Name = "questionView";
             this.questionView.Size = new System.Drawing.Size(676, 323);
             this.questionView.TabIndex = 0;
+            // 
+            // deleteButton
+            // 
+            this.deleteButton.Location = new System.Drawing.Point(530, 182);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(103, 23);
+            this.deleteButton.TabIndex = 1;
+            this.deleteButton.Text = "Удалить вопрос";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // questionText
             // 
@@ -56,15 +68,10 @@
             this.questionAnswer.HeaderText = "Ответ на вопрос";
             this.questionAnswer.Name = "questionAnswer";
             // 
-            // deleteButton
+            // questionDifficulty
             // 
-            this.deleteButton.Location = new System.Drawing.Point(530, 182);
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(103, 23);
-            this.deleteButton.TabIndex = 1;
-            this.deleteButton.Text = "Удалить вопрос";
-            this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            this.questionDifficulty.HeaderText = "Сложность вопроса";
+            this.questionDifficulty.Name = "questionDifficulty";
             // 
             // QuestionViewForm
             // 
@@ -86,8 +93,9 @@
         #endregion
 
         private System.Windows.Forms.DataGridView questionView;
+        private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn questionText;
         private System.Windows.Forms.DataGridViewTextBoxColumn questionAnswer;
-        private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn questionDifficulty;
     }
 }
