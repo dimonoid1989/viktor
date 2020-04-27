@@ -13,7 +13,7 @@ namespace ClassLibraryGiniyIdiot
         Random random = new Random();
         public User user;
         Question currentQuestion;
-        int beginCountQuestions;
+        public int beginCountQuestions;
 
         public Game(User user)
         {
@@ -109,5 +109,9 @@ namespace ClassLibraryGiniyIdiot
         }
         public void SaveQuestion(Question question)
         { FileSystem.SaveString(question.Text + '$' + question.Answer, questionFileName); }
+        public void Timer()
+        {
+            
+        }
     }
 }

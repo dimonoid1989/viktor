@@ -9,6 +9,7 @@ namespace GeniyIdiotWindowsFormsApp
     public partial class MainForm : Form
     {
         static Game game;
+        
         public MainForm()
         {
             InitializeComponent();
@@ -19,6 +20,9 @@ namespace GeniyIdiotWindowsFormsApp
             GetUserName();
             game = new Game(GetNameFromUser.user);
             PrintNextQuestion();
+            ProgressTimer();
+            questionTimer.Start();
+            
         }
         private void GetUserName()
         {
@@ -39,13 +43,17 @@ namespace GeniyIdiotWindowsFormsApp
                 FinishGame();
                 return;
             }
+            questionTimer.Stop();
             PrintNextQuestion();
+            questionTimerView.Value = 0;
+            questionTimer.Start();
         }
         void PrintNextQuestion()
         {
             questionNumber.Text = game.GetQuestionNumber();
             questionTextLabel.Text = game.GetQuestion().Print();
             questionAnswerTextBox.Text = "";
+            questionTimer.Start();
         }
         private void новаяИграToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -92,9 +100,33 @@ namespace GeniyIdiotWindowsFormsApp
         private void FinishGame()
         {
             nextQuestionButton.Enabled = false;
+            questionTimer.Stop();
             var result = game.RightAnswersResult() + " \n " + game.DiagnoseResult();
             MessageBox.Show(result);
             game.SaveResultInMyDocuments();
+        }
+
+        private void questionTimer_Tick(object sender, EventArgs e)
+        {
+            questionTimer.Stop();
+            questionTimerView.Enabled = false;
+            MessageBox.Show("К сожалению, время на ответ вышло");
+            PrintNextQuestion();
+            game.beginCountQuestions++;
+            questionTimerView.Value = 0;
+            questionTimer.Start();
+        }
+        public void ProgressTimer()
+        {
+            questionTimerView.Value = 0;
+            Timer timer = new Timer();
+            timer.Interval = 1000;
+            timer.Enabled = true;
+            timer.Tick += timer_Tick;
+            void timer_Tick(object sender, EventArgs e)
+            {
+               questionTimerView.PerformStep();
+            }
         }
     }
 }

@@ -50,6 +50,8 @@
             this.удалитьПользовательскиеВопросыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.открытьФайлВопросовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.questionAnswerTextBox = new System.Windows.Forms.MaskedTextBox();
+            this.questionTimer = new System.Windows.Forms.Timer(this.components);
+            this.questionTimerView = new System.Windows.Forms.ProgressBar();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -214,11 +216,24 @@
             this.questionAnswerTextBox.Size = new System.Drawing.Size(39, 20);
             this.questionAnswerTextBox.TabIndex = 6;
             // 
+            // questionTimer
+            // 
+            this.questionTimer.Interval = 10000;
+            this.questionTimer.Tick += new System.EventHandler(this.questionTimer_Tick);
+            // 
+            // questionTimerView
+            // 
+            this.questionTimerView.Location = new System.Drawing.Point(54, 260);
+            this.questionTimerView.Name = "questionTimerView";
+            this.questionTimerView.Size = new System.Drawing.Size(368, 23);
+            this.questionTimerView.TabIndex = 7;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(530, 312);
+            this.Controls.Add(this.questionTimerView);
             this.Controls.Add(this.questionAnswerTextBox);
             this.Controls.Add(this.userName);
             this.Controls.Add(this.questionNumber);
@@ -259,6 +274,8 @@
         private System.Windows.Forms.ToolStripMenuItem удалитьПользовательскиеВопросыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem открытьФайлВопросовToolStripMenuItem;
         private System.Windows.Forms.MaskedTextBox questionAnswerTextBox;
+        private System.Windows.Forms.Timer questionTimer;
+        private System.Windows.Forms.ProgressBar questionTimerView;
     }
 }
 
