@@ -29,7 +29,7 @@ namespace ClassLibraryGiniyIdiot
                 FileSystem.CreateFile(questionFileName);
                 foreach (Question question in questions)
                 {
-                    var questionSave = question.Text + '$' + question.Answer;
+                    var questionSave = question.Text + '$' + question.Answer + '$' + question.Difficulty ;
                     FileSystem.SaveString(questionSave, questionFileName);
                 }
             }

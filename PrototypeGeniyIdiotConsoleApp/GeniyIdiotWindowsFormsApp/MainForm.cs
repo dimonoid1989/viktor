@@ -106,7 +106,6 @@ namespace GeniyIdiotWindowsFormsApp
         {
             StopCountTimers();
             Process.Start(Path.Combine(FileSystem.docPath, Game.statisticsFileName));
-            StartCountTimers();
         }
         private void FinishGame()
         {

@@ -100,7 +100,6 @@
             this.difficultyComboBox.Name = "difficultyComboBox";
             this.difficultyComboBox.Size = new System.Drawing.Size(121, 21);
             this.difficultyComboBox.TabIndex = 9;
-            this.difficultyComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // QuestionsForm
             // 

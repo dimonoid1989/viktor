@@ -19,7 +19,7 @@ namespace GeniyIdiotWindowsFormsApp
         {
             if (questionTextBox.Text == "" || answerTextBox.Text =="" || difficultyComboBox.Text =="")
             {
-                MessageBox.Show("Заполните поля\"вопрос-ответ\"!");
+                MessageBox.Show("Заполните поля\"вопрос-ответ-сложность\"!");
                 return;
             }
             text = questionTextBox.Text;
@@ -28,11 +28,6 @@ namespace GeniyIdiotWindowsFormsApp
             game.SaveQuestion(new Question(text,answer,difficulty));
             MessageBox.Show("Вопрос добавлен и сохранен!");
             Close();
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
