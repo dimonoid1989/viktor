@@ -7,6 +7,7 @@ namespace GeniyIdiotWindowsFormsApp
     public partial class GetNameFromUser : Form
     {
         public static User user;
+        bool Exit = true;
         public GetNameFromUser()
         {
             InitializeComponent();
@@ -20,12 +21,16 @@ namespace GeniyIdiotWindowsFormsApp
                 return;
             }
             user = new User(writeUserName.Text);
+            Exit = false;
             Close();
+            
         }
-
         private void GetNameFromUser_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Application.Exit();
+            if (Exit)
+            {
+                Application.Exit();
+            }
         }
     }
 }
