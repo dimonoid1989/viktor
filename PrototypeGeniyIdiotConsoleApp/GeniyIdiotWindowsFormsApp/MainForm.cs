@@ -114,16 +114,6 @@ namespace GeniyIdiotWindowsFormsApp
             MessageBox.Show(result);
             game.SaveResultInMyDocuments();
         }
-
-        private void questionTimer_Tick(object sender, EventArgs e)
-        {
-            questionTimer.Stop();
-            MessageBox.Show("К сожалению, время на ответ вышло");
-            PrintNextQuestion();
-            game.beginCountQuestions++;
-            questionTimerView.Value = 0;
-            questionTimer.Start();
-        }
         public void ProgressTimer()
         {
             questionTimerView.Value = 0;
@@ -131,16 +121,23 @@ namespace GeniyIdiotWindowsFormsApp
             void timer_Tick(object sender, EventArgs e)
             {
                questionTimerView.PerformStep();
+                if (questionTimerView.Value == 100)
+                {
+                    timerProgressBar.Stop();
+                    MessageBox.Show("К сожалению, время на ответ вышло");
+                    PrintNextQuestion();
+                    game.beginCountQuestions++;
+                    questionTimerView.Value = 0;
+                    timerProgressBar.Start();
+                }
             }
         }
         public void StopCountTimers()
         {
-            questionTimer.Stop();
             timerProgressBar.Stop();
         }
         public void StartCountTimers()
         {
-            questionTimer.Start();
             timerProgressBar.Start();
         }
     }

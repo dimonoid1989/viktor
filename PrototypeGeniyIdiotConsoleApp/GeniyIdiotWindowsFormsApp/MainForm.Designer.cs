@@ -50,7 +50,6 @@
             this.удалитьПользовательскиеВопросыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.открытьФайлВопросовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.questionAnswerTextBox = new System.Windows.Forms.MaskedTextBox();
-            this.questionTimer = new System.Windows.Forms.Timer(this.components);
             this.questionTimerView = new System.Windows.Forms.ProgressBar();
             this.timerProgressBar = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
@@ -217,11 +216,6 @@
             this.questionAnswerTextBox.Size = new System.Drawing.Size(39, 20);
             this.questionAnswerTextBox.TabIndex = 6;
             // 
-            // questionTimer
-            // 
-            this.questionTimer.Interval = 10000;
-            this.questionTimer.Tick += new System.EventHandler(this.questionTimer_Tick);
-            // 
             // questionTimerView
             // 
             this.questionTimerView.Location = new System.Drawing.Point(54, 260);
@@ -279,7 +273,6 @@
         private System.Windows.Forms.ToolStripMenuItem удалитьПользовательскиеВопросыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem открытьФайлВопросовToolStripMenuItem;
         private System.Windows.Forms.MaskedTextBox questionAnswerTextBox;
-        private System.Windows.Forms.Timer questionTimer;
         private System.Windows.Forms.ProgressBar questionTimerView;
         private System.Windows.Forms.Timer timerProgressBar;
     }

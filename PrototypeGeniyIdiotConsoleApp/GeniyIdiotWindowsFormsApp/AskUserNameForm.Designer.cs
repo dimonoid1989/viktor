@@ -41,7 +41,6 @@
             this.askUserName.Size = new System.Drawing.Size(152, 13);
             this.askUserName.TabIndex = 0;
             this.askUserName.Text = "Спросить имя пользователя";
-            
             // 
             // writeUserName
             // 
@@ -50,7 +49,6 @@
             this.writeUserName.Size = new System.Drawing.Size(159, 20);
             this.writeUserName.TabIndex = 1;
             this.writeUserName.Text = "Записать имя пользователя";
-           
             // 
             // enterName
             // 
@@ -70,8 +68,11 @@
             this.Controls.Add(this.enterName);
             this.Controls.Add(this.writeUserName);
             this.Controls.Add(this.askUserName);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "GetNameFromUser";
             this.Text = "Спросить имя";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GetNameFromUser_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

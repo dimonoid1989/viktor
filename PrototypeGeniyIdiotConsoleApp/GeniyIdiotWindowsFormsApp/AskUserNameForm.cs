@@ -19,12 +19,13 @@ namespace GeniyIdiotWindowsFormsApp
             { MessageBox.Show("Пожалуйста, введите имя пользователя!");
                 return;
             }
-            var sendToOtherForm = writeUserName.Text;
-            user = new User(sendToOtherForm);
-            var fm = new MainForm();
-            fm.userName.Text = user.Name; 
+            user = new User(writeUserName.Text);
             Close();
         }
-        
+
+        private void GetNameFromUser_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

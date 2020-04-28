@@ -6,7 +6,7 @@
         public int RightAnswers;
         public Diagnose Diagnose;
 
-        public User(string name)
+        public User(string name = "Unnamed user")
         {
             Name = name;
             RightAnswers = 0;
