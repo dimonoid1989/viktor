@@ -18,14 +18,13 @@ namespace GeniyIdiotWindowsFormsApp
         }
         public void questionFormbutton_Click(object sender, EventArgs e)
         {
-            if (questionTextBox.Text == "" || answerTextBox.Text =="") // || difficultyComboBox.Text =="")
+            if (questionTextBox.Text == "" || answerTextBox.Text =="" || difficulty == 0)
             {
                 MessageBox.Show("Заполните поля\"вопрос-ответ-сложность\"!");
                 return;
             }
             text = questionTextBox.Text;
             answer = Convert.ToInt32(answerTextBox.Text);
-            //difficulty = Convert.ToInt32(difficultyComboBox.SelectedItem);
             game.SaveQuestion(new Question(text,answer,difficulty));
             MessageBox.Show("Вопрос добавлен и сохранен!");
             Close();
