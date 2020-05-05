@@ -17,6 +17,7 @@ namespace ClassLibraryGiniyIdiot
         public User user;
         Question currentQuestion;
         public int beginCountQuestions;
+        public int countDifficultySum = 0;
 
         public Game(User user)
         {
@@ -50,6 +51,7 @@ namespace ClassLibraryGiniyIdiot
         {
             var randomQuestionIndex = random.Next(questions.Count);
             currentQuestion = questions[randomQuestionIndex];
+            countDifficultySum += currentQuestion.Difficulty; 
             questions.Remove(questions[randomQuestionIndex]);
             return currentQuestion;
         }
@@ -63,6 +65,7 @@ namespace ClassLibraryGiniyIdiot
             if (userAnswer == currentQuestion.Answer)
             {
                 user.RightAnswers++;
+                user.RightAnswersDifficulty += currentQuestion.Difficulty;
             }
         }
         public bool IsEnd()
@@ -75,7 +78,7 @@ namespace ClassLibraryGiniyIdiot
         }
         public string DiagnoseResult()
         {
-            var resultDiagnose = Diagnose.CalculateDiagnose(user, beginCountQuestions);
+            var resultDiagnose = Diagnose.CalculateDiagnose(user, beginCountQuestions, countDifficultySum);
             user.Diagnose = resultDiagnose;
             return $"{user.Name}, Ваш диагноз: {user.Diagnose.Name}";
         }

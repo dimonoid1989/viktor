@@ -14,10 +14,12 @@ namespace ClassLibraryGiniyIdiot
             Name = text;
         }
 
-        public static Diagnose CalculateDiagnose(User user, int countQuestions)
+        public static Diagnose CalculateDiagnose(User user, int countQuestions, int countDifficulty)
         {
             var percentRightAnswers = user.RightAnswers * 100.0 / countQuestions;
-            var result = Convert.ToInt32(percentRightAnswers / 20);
+            var percentDifficultyRightAnswers = user.RightAnswersDifficulty * 100.0 / countDifficulty;
+            var percentResult = (percentRightAnswers + percentDifficultyRightAnswers) / 2.0;
+            var result = Convert.ToInt32(percentResult / 20);
             return GetDiagnoses()[result];
         }
 
