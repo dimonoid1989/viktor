@@ -4,15 +4,17 @@ namespace ClassLibraryGiniyIdiot
 {
     public class Statistics
     {
-        public string Name;
-        public string RightAnswers;
-        public string Diagnose;
+        public string Name { get; set; }
+        public int RightAnswers { get; set; }
+        public string Diagnose { get; set; }
 
-        public Statistics(string name, string rightAnswers, string diagnose)
+        public Statistics(string name, int rightAnswers, string diagnose)
         {
             Name = name;
             RightAnswers = rightAnswers;
             Diagnose = diagnose;
         }
+        public Statistics()
+        { }
     }
 }

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Unicode;
+using System.Text.Encodings.Web;
 
 
 namespace ClassLibraryGiniyIdiot
@@ -32,14 +35,14 @@ namespace ClassLibraryGiniyIdiot
         {
             File.WriteAllText(Path.Combine(docPath, fileName), string.Empty);
         }
-        public void Test(List <Question> list,string value, string fileName)
+        public static string Serialize(object value)
         {
-            StreamWriter writer = new StreamWriter(Path.Combine(docPath, Game.questionFileName), false);
-            foreach (var item in list)
+            JsonSerializerOptions options = new JsonSerializerOptions
             {
-                writer.WriteLine(value);
-            }
-            writer.Close();
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+                WriteIndented = true
+            };
+           return JsonSerializer.Serialize(value, options);
         }
     }
 }

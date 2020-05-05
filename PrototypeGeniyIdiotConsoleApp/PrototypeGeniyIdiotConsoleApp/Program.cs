@@ -93,7 +93,9 @@ namespace PrototypeGeniyIdiotConsoleApp
             var text = Console.ReadLine();
             Console.WriteLine("Введите ответ на вопрос");
             var answer = TryGetUserAnswer();
-            return new Question(text, answer);
+            Console.WriteLine("Введите сложность вопроса");
+            var difficulty = TryGetUserAnswer();
+            return new Question(text, answer, difficulty);
         }
     }
 }

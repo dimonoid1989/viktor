@@ -1,13 +1,16 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 
 namespace ClassLibraryGiniyIdiot
 {
     public class Game
     {
-        public const string questionFileName = "Questions.txt";
-        public const string statisticsFileName = "Statistics.txt";
+        public const string questionFileName = "Questions.json";
+        public const string statisticsFileName = "Statistics.json";
         public int questionNumber = 0;
         List<Question> questions;
         Random random = new Random();
@@ -27,11 +30,8 @@ namespace ClassLibraryGiniyIdiot
             if (!FileSystem.IsExist(questionFileName))
             {
                 FileSystem.CreateFile(questionFileName);
-                foreach (Question question in questions)
-                {
-                    var questionSave = question.Text + '$' + question.Answer + '$' + question.Difficulty ;
-                    FileSystem.SaveString(questionSave, questionFileName);
-                }
+                var questionSave = FileSystem.Serialize(questions);
+                FileSystem.SaveString(questionSave, questionFileName);
             }
             if (!FileSystem.IsExist(statisticsFileName))
             {
@@ -42,17 +42,7 @@ namespace ClassLibraryGiniyIdiot
         {
             questions = new List<Question> { };
             var result = FileSystem.GetString(questionFileName);
-            var separator = new[] { "\r\n" };
-            var splitedStrings = result.Split(separator, StringSplitOptions.RemoveEmptyEntries);
-            for (int i = 0; i < splitedStrings.Length; i++)
-            {
-                var splitedWord = splitedStrings[i].Split('$');
-                var text = splitedWord[0];
-                var answer = Convert.ToInt32(splitedWord[1]);
-                var difficulty = Convert.ToInt32(splitedWord[2]);
-                var question = new Question(text, answer, difficulty);
-                questions.Add(question);
-            }
+            questions = JsonSerializer.Deserialize<List<Question>>(result);
             beginCountQuestions = questions.Count;
             return questions;
         }
@@ -91,25 +81,29 @@ namespace ClassLibraryGiniyIdiot
         }
         public void SaveResultInMyDocuments()
         {
-            FileSystem.SaveString(user.Name + '$' + user.RightAnswers + '$' + user.Diagnose.Name, statisticsFileName);
+            var stat = new Statistics(user.Name, user.RightAnswers, user.Diagnose.Name);
+            var statistics = new List<Statistics> { stat };
+            JsonSerializerOptions options = new JsonSerializerOptions
+            {
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+                WriteIndented = true
+            };
+            var statisticsJson = JsonSerializer.Serialize(statistics, options);
+            FileSystem.SaveString(statisticsJson, statisticsFileName);
         }
-        public Statistics[] ReadStatistics()
+        public List<Statistics> ReadStatistics()
         {
             var result = FileSystem.GetString(statisticsFileName);
-            string[] delimeter = new string[1];
-            delimeter[0] = "\r\n";
-            var splitedStrings = result.Split(delimeter, StringSplitOptions.RemoveEmptyEntries);
-            var mass = new Statistics[splitedStrings.Length];
-            for (int i = 0; i < splitedStrings.Length; i++)
-            {
-                var splitedWord = splitedStrings[i].Split('$');
-                var statistics = new Statistics(splitedWord[0], splitedWord[1], splitedWord[2]);
-                mass[i] = statistics;
-            }
+            var mass = JsonSerializer.Deserialize<List<Statistics>>(result);
             return mass;
         }
         public void SaveQuestion(Question question)
-        { FileSystem.SaveString(question.Text + '$' + question.Answer + '$' + question.Difficulty, questionFileName); }
-       
+        {
+            var result = FileSystem.GetString(questionFileName);
+            var questions = JsonSerializer.Deserialize<List<Question>>(result);
+            questions.Add(question);
+            var questionSave = FileSystem.Serialize(questions);
+            FileSystem.SaveString(questionSave, questionFileName, false);
+        }
     }
 }

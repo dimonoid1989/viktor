@@ -9,7 +9,7 @@ namespace GeniyIdiotWindowsFormsApp
     public partial class QuestionViewForm : Form
     {
         Game game;
-        List <Question> questions;
+        List<Question> questions;
         public QuestionViewForm(Game game)
         {
             InitializeComponent();
@@ -31,13 +31,9 @@ namespace GeniyIdiotWindowsFormsApp
             int rowIndex = questionView.CurrentRow.Index;
             questions.RemoveAt(rowIndex);
             questionView.Rows.Remove(questionView.Rows[rowIndex]);
-            FileSystem.CleanFile(Game.questionFileName);
-            foreach (var question in questions)
-            {
-                FileSystem.SaveString(question.Text + '$' + question.Answer + '$' + question.Difficulty, Game.questionFileName);
-            }
+            var questionSave = FileSystem.Serialize(questions);
+            FileSystem.SaveString(questionSave, Game.questionFileName, false);
         }
-
         private void QuestionViewForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             MessageBox.Show("Для обработки изменений приложение будет принудительно перезапущенно", "Внимание!");
