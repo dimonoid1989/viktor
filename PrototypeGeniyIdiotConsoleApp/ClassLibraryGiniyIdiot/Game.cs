@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using System.Net.Http;
 
 namespace ClassLibraryGiniyIdiot
 {
@@ -51,7 +52,7 @@ namespace ClassLibraryGiniyIdiot
         {
             var randomQuestionIndex = random.Next(questions.Count);
             currentQuestion = questions[randomQuestionIndex];
-            countDifficultySum += currentQuestion.Difficulty; 
+            countDifficultySum += currentQuestion.Difficulty;
             questions.Remove(questions[randomQuestionIndex]);
             return currentQuestion;
         }
@@ -84,19 +85,19 @@ namespace ClassLibraryGiniyIdiot
         }
         public void SaveResultInMyDocuments()
         {
-            var stat = new Statistics(user.Name, user.RightAnswers, user.Diagnose.Name);
-            var statistics = new List<Statistics> { stat };
-            JsonSerializerOptions options = new JsonSerializerOptions
-            {
-                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
-                WriteIndented = true
-            };
-            var statisticsJson = JsonSerializer.Serialize(statistics, options);
-            FileSystem.SaveString(statisticsJson, statisticsFileName);
+            var thisGameStat = new Statistics(user.Name, user.RightAnswers, user.Diagnose.Name);
+            var PriviousGamesStatistics = JsonSerializer.Deserialize<List<Statistics>>(FileSystem.GetString(statisticsFileName));
+            PriviousGamesStatistics.Add(thisGameStat);
+            var statisticsJson = FileSystem.Serialize(PriviousGamesStatistics);
+            FileSystem.SaveString(statisticsJson, statisticsFileName, false);
         }
         public List<Statistics> ReadStatistics()
         {
             var result = FileSystem.GetString(statisticsFileName);
+            if (result == "")
+            {
+                return new List<Statistics> { };
+            }
             var mass = JsonSerializer.Deserialize<List<Statistics>>(result);
             return mass;
         }

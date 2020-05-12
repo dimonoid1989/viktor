@@ -125,6 +125,11 @@ namespace GeniyIdiotWindowsFormsApp
                 {
                     timerProgressBar.Stop();
                     MessageBox.Show("К сожалению, время на ответ вышло");
+                    if (game.beginCountQuestions == game.questionNumber)
+                    {
+                        FinishGame();
+                        return;
+                    }
                     PrintNextQuestion();
                     game.beginCountQuestions++;
                     questionTimerView.Value = 0;
