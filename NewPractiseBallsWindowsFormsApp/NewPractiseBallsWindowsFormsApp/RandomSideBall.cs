@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace NewPractiseBallsWindowsFormsApp
 {
-    public partial class Form1 : Form
+    class RandomSideBall : RandomPointBall
     {
-        public Form1()
+        public RandomSideBall(MainForm form) : base(form)
         {
-            InitializeComponent();
+            vx = random.Next(-10, 10);
+            vy = random.Next(-10, 10);
         }
     }
 }
