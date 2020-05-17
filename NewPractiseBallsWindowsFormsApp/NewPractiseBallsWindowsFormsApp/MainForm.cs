@@ -13,6 +13,7 @@ namespace NewPractiseBallsWindowsFormsApp
     public partial class MainForm : Form
     {
         List<RandomSideBall> balls;
+        int countBalls;
         public MainForm()
         {
             InitializeComponent();
@@ -20,14 +21,16 @@ namespace NewPractiseBallsWindowsFormsApp
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+        
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
-            timer.Start();
+            foreach (var ball in balls)
+            {
+                ball.Start();
+            }
+            countBalls = 0;
         }
-
         private void button2_Click(object sender, EventArgs e)
         {
             balls = new List<RandomSideBall>();
@@ -38,24 +41,26 @@ namespace NewPractiseBallsWindowsFormsApp
                 balls.Add(ball);
             }
         }
-        
-
         private void MainForm_MouseClick(object sender, MouseEventArgs e)
         {
-            
+            var location = e.Location;
+            foreach (var ball in balls)
+            {
+                if (ball.ClickCheck(location))
+                { ball.StopMoving(); }
+            }
         }
-
-        private void timer1_Tick(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
             foreach (var ball in balls)
             {
-                ball.Move();
+                ball.StopMoving();
+                if (ball.OnScreen())
+                {
+                    countBalls++;
+                }
             }
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            timer.Stop();
+            MessageBox.Show(countBalls + " шариков удалось поймать");
         }
     }
 }

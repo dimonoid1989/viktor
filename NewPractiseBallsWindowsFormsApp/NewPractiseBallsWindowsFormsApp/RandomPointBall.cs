@@ -10,8 +10,8 @@ namespace NewPractiseBallsWindowsFormsApp
     {
         public RandomPointBall(MainForm form) : base(form)
         {
-            x = random.Next(0, form.Width);
-            y = random.Next(0, form.Height);
+            x = random.Next(50, form.ClientSize.Width - 100);
+            y = random.Next(50, form.ClientSize.Height - 100);
             brysh = Brushes.Chartreuse;
         }
     }
