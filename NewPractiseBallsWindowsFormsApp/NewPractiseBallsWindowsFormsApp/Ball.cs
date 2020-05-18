@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace NewPractiseBallsWindowsFormsApp
@@ -17,7 +18,7 @@ namespace NewPractiseBallsWindowsFormsApp
         private Rectangle rectangle;
         private int size;
         private double radius;
-
+        private bool active;
         public Ball(MainForm form)
         {
             this.form = form;
@@ -55,10 +56,12 @@ namespace NewPractiseBallsWindowsFormsApp
         public void StopMoving()
         {
             timer.Stop();
+            active = false;
         }
         public void Start()
         {
             timer.Start();
+            active = true;
         }
         public bool ClickCheck(Point location)
         {
@@ -67,6 +70,10 @@ namespace NewPractiseBallsWindowsFormsApp
         public bool OnScreen()
         {
             return x < form.Width - size && y < form.Height - size && x > 0 && y > 0;
+        }
+        public bool IsBallActive()
+        {
+            return active;
         }
     }
 }

@@ -42,9 +42,12 @@ namespace NewPractiseBallsWindowsFormsApp
             {
                 if (ball.ClickCheck(location))
                 {
-                    ball.StopMoving();
-                    countBalls++;
-                    viewCatchedBalls.Text = "Шариков поймано " + countBalls;
+                    if (ball.IsBallActive())
+                    {
+                        ball.StopMoving();
+                        countBalls++;
+                        viewCatchedBalls.Text = "Шариков поймано " + countBalls;
+                    }
                 }
             }
         }
