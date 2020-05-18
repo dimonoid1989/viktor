@@ -28,62 +28,75 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.startMoving = new System.Windows.Forms.Button();
+            this.addBalls = new System.Windows.Forms.Button();
+            this.stopAndCount = new System.Windows.Forms.Button();
+            this.viewCatchedBalls = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // button1
+            // startMoving
             // 
-            this.button1.Location = new System.Drawing.Point(583, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(87, 35);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Начать движение";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.startMoving.Location = new System.Drawing.Point(583, 12);
+            this.startMoving.Name = "startMoving";
+            this.startMoving.Size = new System.Drawing.Size(87, 35);
+            this.startMoving.TabIndex = 0;
+            this.startMoving.Text = "Начать движение";
+            this.startMoving.UseVisualStyleBackColor = true;
+            this.startMoving.Click += new System.EventHandler(this.startMoving_Click);
             // 
-            // button2
+            // addBalls
             // 
-            this.button2.Location = new System.Drawing.Point(692, 12);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(84, 35);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Добавить шарики";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.addBalls.Location = new System.Drawing.Point(692, 12);
+            this.addBalls.Name = "addBalls";
+            this.addBalls.Size = new System.Drawing.Size(84, 35);
+            this.addBalls.TabIndex = 1;
+            this.addBalls.Text = "Добавить шарики";
+            this.addBalls.UseVisualStyleBackColor = true;
+            this.addBalls.Click += new System.EventHandler(this.addBalls_Click);
             // 
-            // button3
+            // stopAndCount
             // 
-            this.button3.Location = new System.Drawing.Point(458, 11);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(91, 36);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Остановить движение";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.stopAndCount.Location = new System.Drawing.Point(458, 11);
+            this.stopAndCount.Name = "stopAndCount";
+            this.stopAndCount.Size = new System.Drawing.Size(91, 36);
+            this.stopAndCount.TabIndex = 2;
+            this.stopAndCount.Text = "Остановить движение";
+            this.stopAndCount.UseVisualStyleBackColor = true;
+            this.stopAndCount.Click += new System.EventHandler(this.stopAndCount_Click);
+            // 
+            // viewCatchedBalls
+            // 
+            this.viewCatchedBalls.AutoSize = true;
+            this.viewCatchedBalls.Location = new System.Drawing.Point(42, 33);
+            this.viewCatchedBalls.Name = "viewCatchedBalls";
+            this.viewCatchedBalls.Size = new System.Drawing.Size(0, 13);
+            this.viewCatchedBalls.TabIndex = 3;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.HighlightText;
             this.ClientSize = new System.Drawing.Size(784, 461);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.viewCatchedBalls);
+            this.Controls.Add(this.stopAndCount);
+            this.Controls.Add(this.addBalls);
+            this.Controls.Add(this.startMoving);
             this.Name = "MainForm";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseClick);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button startMoving;
+        private System.Windows.Forms.Button addBalls;
+        private System.Windows.Forms.Button stopAndCount;
+        private System.Windows.Forms.Label viewCatchedBalls;
     }
 }
 

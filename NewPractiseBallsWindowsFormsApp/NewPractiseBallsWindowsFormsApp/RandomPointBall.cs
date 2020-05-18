@@ -1,18 +1,15 @@
 ﻿using System.Drawing;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NewPractiseBallsWindowsFormsApp
 {
     class RandomPointBall : Ball
     {
+        private int stepFromClientSize = 50;
         public RandomPointBall(MainForm form) : base(form)
         {
-            x = random.Next(50, form.ClientSize.Width - 100);
-            y = random.Next(50, form.ClientSize.Height - 100);
-            brysh = Brushes.Chartreuse;
+            x = random.Next(stepFromClientSize, form.ClientSize.Width - stepFromClientSize*2);
+            y = random.Next(stepFromClientSize, form.ClientSize.Height - stepFromClientSize*2);
+            //brush = Brushes.Chartreuse;
         }
     }
 }

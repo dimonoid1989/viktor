@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NewPractiseBallsWindowsFormsApp
@@ -15,24 +11,26 @@ namespace NewPractiseBallsWindowsFormsApp
         protected int y = 250;
         protected int vx = 10;
         protected int vy = 10;
-        protected Brush brysh = Brushes.Red;
+        protected Brush brush = Brushes.Red;
         private MainForm form;
         protected Timer timer = new Timer();
         private Rectangle rectangle;
         private int size;
+        private double radius;
 
         public Ball(MainForm form)
         {
             this.form = form;
             timer.Interval = 100;
             timer.Tick += Timer_Tick;
+            size = 50;
+            radius = size / 2;
         }
         public void Show()
         {
             Graphics graphics = form.CreateGraphics();
-            size = 50;
             rectangle = new Rectangle(x, y, size, size);
-            graphics.FillEllipse(Brushes.MediumVioletRed, rectangle);
+            graphics.FillEllipse(brush, rectangle);
         }
         private void Go()
         {
@@ -42,7 +40,7 @@ namespace NewPractiseBallsWindowsFormsApp
         private void Clear()
         {
             var graphics = form.CreateGraphics();
-            graphics.FillEllipse(Brushes.LightGray, rectangle);
+            graphics.FillEllipse(Brushes.White, rectangle);
         }
         private void Move()
         {
@@ -64,7 +62,7 @@ namespace NewPractiseBallsWindowsFormsApp
         }
         public bool ClickCheck(Point location)
         {
-            return Math.Pow(location.X - x-25, 2) + Math.Pow(location.Y - y-25, 2) <= Math.Pow(size, 2);
+            return Math.Pow(location.X - x-radius, 2) + Math.Pow(location.Y - y-radius, 2) <= Math.Pow(size, 2);
         }
         public bool OnScreen()
         {
