@@ -30,7 +30,7 @@
         {
             this.startMoving = new System.Windows.Forms.Button();
             this.addBalls = new System.Windows.Forms.Button();
-            this.stopAndCount = new System.Windows.Forms.Button();
+            this.endGame = new System.Windows.Forms.Button();
             this.viewCatchedBalls = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -54,15 +54,15 @@
             this.addBalls.UseVisualStyleBackColor = true;
             this.addBalls.Click += new System.EventHandler(this.addBalls_Click);
             // 
-            // stopAndCount
+            // endGame
             // 
-            this.stopAndCount.Location = new System.Drawing.Point(458, 11);
-            this.stopAndCount.Name = "stopAndCount";
-            this.stopAndCount.Size = new System.Drawing.Size(91, 36);
-            this.stopAndCount.TabIndex = 2;
-            this.stopAndCount.Text = "Остановить движение";
-            this.stopAndCount.UseVisualStyleBackColor = true;
-            this.stopAndCount.Click += new System.EventHandler(this.stopAndCount_Click);
+            this.endGame.Location = new System.Drawing.Point(458, 11);
+            this.endGame.Name = "endGame";
+            this.endGame.Size = new System.Drawing.Size(91, 36);
+            this.endGame.TabIndex = 2;
+            this.endGame.Text = "Закончить игру";
+            this.endGame.UseVisualStyleBackColor = true;
+            this.endGame.Click += new System.EventHandler(this.endGame_Click);
             // 
             // viewCatchedBalls
             // 
@@ -79,7 +79,7 @@
             this.BackColor = System.Drawing.SystemColors.HighlightText;
             this.ClientSize = new System.Drawing.Size(784, 461);
             this.Controls.Add(this.viewCatchedBalls);
-            this.Controls.Add(this.stopAndCount);
+            this.Controls.Add(this.endGame);
             this.Controls.Add(this.addBalls);
             this.Controls.Add(this.startMoving);
             this.Name = "MainForm";
@@ -95,7 +95,7 @@
 
         private System.Windows.Forms.Button startMoving;
         private System.Windows.Forms.Button addBalls;
-        private System.Windows.Forms.Button stopAndCount;
+        private System.Windows.Forms.Button endGame;
         private System.Windows.Forms.Label viewCatchedBalls;
     }
 }

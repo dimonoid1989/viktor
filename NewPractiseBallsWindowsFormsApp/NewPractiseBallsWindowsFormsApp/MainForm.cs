@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace NewPractiseBallsWindowsFormsApp
@@ -43,6 +44,10 @@ namespace NewPractiseBallsWindowsFormsApp
         private void MainForm_MouseClick(object sender, MouseEventArgs e)
         {
             var location = e.Location;
+            if (balls == null)
+            {
+                return;
+            }
             foreach (var ball in balls)
             {
                 if (ball.ClickCheck(location))
@@ -56,7 +61,7 @@ namespace NewPractiseBallsWindowsFormsApp
                 }
             }
         }
-        private void stopAndCount_Click(object sender, EventArgs e)
+        private void endGame_Click(object sender, EventArgs e)
         {
             if (balls == null)
             {
@@ -66,12 +71,11 @@ namespace NewPractiseBallsWindowsFormsApp
             foreach (var ball in balls)
             {
                 ball.StopMoving();
-                if (ball.OnScreen())
-                {
-                    viewCatchedBalls.Text = "Шариков поймано " + countBalls;
-                }
             }
+            balls = null;
             MessageBox.Show(countBalls + " шариков удалось поймать");
+            BackColor = Color.White;
+            viewCatchedBalls.Text = default;
         }
     }
 }

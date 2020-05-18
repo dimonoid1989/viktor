@@ -19,6 +19,7 @@ namespace NewPractiseBallsWindowsFormsApp
         private int size;
         private double radius;
         private bool active;
+        private Graphics graphics;
         public Ball(MainForm form)
         {
             this.form = form;
@@ -74,6 +75,10 @@ namespace NewPractiseBallsWindowsFormsApp
         public bool IsBallActive()
         {
             return active;
+        }
+        public void DeleteBalls()
+        {
+            graphics.Clear(Color.White);
         }
     }
 }
