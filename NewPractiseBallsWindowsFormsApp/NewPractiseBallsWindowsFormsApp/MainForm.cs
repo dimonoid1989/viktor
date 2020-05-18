@@ -19,6 +19,11 @@ namespace NewPractiseBallsWindowsFormsApp
         }
         private void startMoving_Click(object sender, EventArgs e)
         {
+            if (balls == null)
+            {
+                MessageBox.Show("Сначала необходимо добавить шарики!");
+                return;
+            }
             foreach (var ball in balls)
             {
                 ball.Start();
@@ -53,6 +58,11 @@ namespace NewPractiseBallsWindowsFormsApp
         }
         private void stopAndCount_Click(object sender, EventArgs e)
         {
+            if (balls == null)
+            {
+                MessageBox.Show("Сначала необходимо добавить шарики!");
+                return;
+            }
             foreach (var ball in balls)
             {
                 ball.StopMoving();
