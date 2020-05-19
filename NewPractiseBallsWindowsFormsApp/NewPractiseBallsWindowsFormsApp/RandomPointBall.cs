@@ -4,12 +4,11 @@ namespace NewPractiseBallsWindowsFormsApp
 {
     class RandomPointBall : Ball
     {
-        private int stepFromClientSize = 50;
+        private int stepFromClientSize = 100;
         public RandomPointBall(MainForm form) : base(form)
         {
-            x = random.Next(stepFromClientSize, form.ClientSize.Width - stepFromClientSize*2);
-            y = random.Next(stepFromClientSize, form.ClientSize.Height - stepFromClientSize*2);
-            //brush = Brushes.Chartreuse;
+            x = random.Next(0, form.ClientSize.Width - stepFromClientSize);
+            y = random.Next(0, form.ClientSize.Height - stepFromClientSize);
         }
     }
 }

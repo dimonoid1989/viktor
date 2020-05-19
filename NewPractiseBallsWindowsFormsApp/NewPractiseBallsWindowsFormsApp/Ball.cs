@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace NewPractiseBallsWindowsFormsApp
 {
-    class Ball
+    class Ball 
     {
         protected static Random random = new Random();
         protected int x = 250;
@@ -13,13 +12,11 @@ namespace NewPractiseBallsWindowsFormsApp
         protected int vx = 10;
         protected int vy = 10;
         protected Brush brush = Brushes.Red;
-        private MainForm form;
-        protected Timer timer = new Timer();
+        private readonly MainForm form;
+        protected readonly Timer timer = new Timer();
         private Rectangle rectangle;
-        private int size;
-        private double radius;
-        private bool active;
-        private Graphics graphics;
+        private readonly int size;
+        private readonly double radius;
         public Ball(MainForm form)
         {
             this.form = form;
@@ -42,7 +39,8 @@ namespace NewPractiseBallsWindowsFormsApp
         private void Clear()
         {
             var graphics = form.CreateGraphics();
-            graphics.FillEllipse(Brushes.White, rectangle);
+            using (SolidBrush solidBrush = new SolidBrush(SystemColors.Control)) 
+            graphics.FillEllipse(solidBrush, rectangle);
         }
         private void Move()
         {
@@ -57,16 +55,14 @@ namespace NewPractiseBallsWindowsFormsApp
         public void StopMoving()
         {
             timer.Stop();
-            active = false;
         }
         public void Start()
         {
             timer.Start();
-            active = true;
         }
         public bool ClickCheck(Point location)
         {
-            return Math.Pow(location.X - x-radius, 2) + Math.Pow(location.Y - y-radius, 2) <= Math.Pow(size, 2);
+            return Math.Pow(location.X - x - radius, 2) + Math.Pow(location.Y - y - radius, 2) <= Math.Pow(size, 2);
         }
         public bool OnScreen()
         {
@@ -74,11 +70,7 @@ namespace NewPractiseBallsWindowsFormsApp
         }
         public bool IsBallActive()
         {
-            return active;
-        }
-        public void DeleteBalls()
-        {
-            graphics.Clear(Color.White);
+            return timer.Enabled;
         }
     }
 }

@@ -8,7 +8,8 @@ namespace NewPractiseBallsWindowsFormsApp
     public partial class MainForm : Form
     {
         List<RandomSideBall> balls;
-        int countBalls;
+        int clickCountBalls;
+        int buttonCountBalls;
         public MainForm()
         {
             InitializeComponent();
@@ -16,20 +17,18 @@ namespace NewPractiseBallsWindowsFormsApp
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            startMoving.Enabled = false;
+            endGame.Enabled = false;
         }
         private void startMoving_Click(object sender, EventArgs e)
         {
-            if (balls == null)
-            {
-                MessageBox.Show("Сначала необходимо добавить шарики!");
-                return;
-            }
             foreach (var ball in balls)
             {
                 ball.Start();
             }
-            countBalls = 0;
+            clickCountBalls = 0;
+            buttonCountBalls = 0;
+            endGame.Enabled = true;
         }
         private void addBalls_Click(object sender, EventArgs e)
         {
@@ -40,6 +39,7 @@ namespace NewPractiseBallsWindowsFormsApp
                 ball.Show();
                 balls.Add(ball);
             }
+            startMoving.Enabled = true;
         }
         private void MainForm_MouseClick(object sender, MouseEventArgs e)
         {
@@ -55,27 +55,26 @@ namespace NewPractiseBallsWindowsFormsApp
                     if (ball.IsBallActive())
                     {
                         ball.StopMoving();
-                        countBalls++;
-                        viewCatchedBalls.Text = "Шариков поймано " + countBalls;
+                        clickCountBalls++;
+                        viewCatchedBalls.Text = "Шариков поймано " + clickCountBalls;
                     }
                 }
             }
         }
         private void endGame_Click(object sender, EventArgs e)
         {
-            if (balls == null)
-            {
-                MessageBox.Show("Сначала необходимо добавить шарики!");
-                return;
-            }
             foreach (var ball in balls)
             {
                 ball.StopMoving();
+                if (ball.OnScreen())
+                { buttonCountBalls++; }
             }
-            balls = null;
-            MessageBox.Show(countBalls + " шариков удалось поймать");
-            BackColor = Color.White;
+            balls.Clear();
+            MessageBox.Show(buttonCountBalls + " шариков удалось поймать");
+            Invalidate();
             viewCatchedBalls.Text = default;
+            startMoving.Enabled = false;
+            endGame.Enabled = false;
         }
     }
 }
