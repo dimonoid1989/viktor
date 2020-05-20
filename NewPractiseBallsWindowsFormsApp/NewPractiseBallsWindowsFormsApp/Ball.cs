@@ -13,7 +13,7 @@ namespace NewPractiseBallsWindowsFormsApp
         protected int vy = 10;
         protected Brush brush = Brushes.Red;
         private readonly MainForm form;
-        private readonly Timer timer = new Timer();
+        protected readonly Timer timer = new Timer();
         private Rectangle rectangle;
         protected readonly int size;
         private readonly double radius;
