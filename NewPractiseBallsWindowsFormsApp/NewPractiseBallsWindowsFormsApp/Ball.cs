@@ -13,9 +13,9 @@ namespace NewPractiseBallsWindowsFormsApp
         protected int vy = 10;
         protected Brush brush = Brushes.Red;
         private readonly MainForm form;
-        protected readonly Timer timer = new Timer();
+        private readonly Timer timer = new Timer();
         private Rectangle rectangle;
-        private readonly int size;
+        protected readonly int size;
         private readonly double radius;
         public Ball(MainForm form)
         {
@@ -39,7 +39,7 @@ namespace NewPractiseBallsWindowsFormsApp
         private void Clear()
         {
             var graphics = form.CreateGraphics();
-            using (SolidBrush solidBrush = new SolidBrush(SystemColors.Control)) 
+            SolidBrush solidBrush = new SolidBrush(form.BackColor);
             graphics.FillEllipse(solidBrush, rectangle);
         }
         private void Move()
