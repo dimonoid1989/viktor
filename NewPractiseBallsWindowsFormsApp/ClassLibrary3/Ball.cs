@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace NewPractiseBallsWindowsFormsApp
 {
-    class Ball 
+    public class Ball 
     {
         protected static Random random = new Random();
         protected int x = 250;
@@ -12,12 +12,12 @@ namespace NewPractiseBallsWindowsFormsApp
         protected int vx = 10;
         protected int vy = 10;
         protected Brush brush = Brushes.Red;
-        private readonly MainForm form;
+        private readonly Form form;
         protected readonly Timer timer = new Timer();
         private Rectangle rectangle;
         protected readonly int size;
         private readonly double radius;
-        public Ball(MainForm form)
+        public Ball(Form form)
         {
             this.form = form;
             timer.Interval = 100;
@@ -72,5 +72,6 @@ namespace NewPractiseBallsWindowsFormsApp
         {
             return timer.Enabled;
         }
+       
     }
 }

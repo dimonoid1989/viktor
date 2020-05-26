@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace NewPractiseBallsWindowsFormsApp
 {
-    class BilliardsBall : RandomSideBall
+    public class BilliardsBall : RandomSideBall
     {
         private readonly int minSpeed = 50;
         private readonly int maxSpeed = 200;
@@ -13,7 +13,7 @@ namespace NewPractiseBallsWindowsFormsApp
         private int right = 0;
         public BilliardsBall(MainForm form) : base(form)
         {
-            timer.Interval = random.Next(minSpeed, maxSpeed);
+           // timer.Interval = random.Next(minSpeed, maxSpeed);
             timer.Tick += Timer_Tick;
         }
         private void Timer_Tick(object sender, EventArgs e)
@@ -54,5 +54,7 @@ namespace NewPractiseBallsWindowsFormsApp
         { return left; }
         public int RightSide()
         { return right; }
+
+       // public event TouchedFormSide 
     }
 }

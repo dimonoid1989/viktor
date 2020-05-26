@@ -1,7 +1,7 @@
 ﻿
 namespace NewPractiseBallsWindowsFormsApp
 {
-    class RandomSideBall : RandomPointBall
+    public class RandomSideBall : RandomPointBall
     {
         public RandomSideBall(MainForm form) : base(form)
         {
