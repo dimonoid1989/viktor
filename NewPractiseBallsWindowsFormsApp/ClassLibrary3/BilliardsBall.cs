@@ -5,37 +5,39 @@ namespace NewPractiseBallsWindowsFormsApp
 {
     public class BilliardsBall : RandomSideBall
     {
-        private readonly int minSpeed = 50;
-        private readonly int maxSpeed = 200;
         private int up = 0;
         private int down = 0;
         private int left = 0;
         private int right = 0;
+        public delegate void BallDelegat();
+        public event BallDelegat OnMove;
         public BilliardsBall(Form form) : base(form)
         {
-            timer.Interval = random.Next(minSpeed, maxSpeed);
+            vx = random.Next(-30, 30);
+            vy = random.Next(-30, 30);
             timer.Tick += Timer_Tick;
+            OnMove += MoveToOtherSide;
         }
         private void Timer_Tick(object sender, EventArgs e)
         {
             if (!OnScreen())
             {
-                MoveToOtherSide();
+               OnMove();
             }
         }
-        private void MoveToOtherSide()
+        public void MoveToOtherSide()
         {
-            if (y <= 0 )
+            if (y <= 0)
             {
                 vy *= -1;
                 up++;
             }
-            if (y >= (Form.ActiveForm.ClientSize.Height - size))
+            if (y >= (form.Height - size*2))
             {
                 vy *= -1;
                 down++;
             }
-            if (x >= (Form.ActiveForm.ClientSize.Width - size))
+            if (x >= (form.Width - size*1.5))
             {
                 vx *= -1;
                 right++;
@@ -54,7 +56,5 @@ namespace NewPractiseBallsWindowsFormsApp
         { return left; }
         public int RightSide()
         { return right; }
-
-       // public event TouchedFormSide 
     }
 }
