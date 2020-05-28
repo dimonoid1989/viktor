@@ -8,7 +8,7 @@ namespace BilliardsBalls
     public partial class BilliardForm : Form
     {
         List<BilliardsBall> balls;
-        Timer sideCountTimer = new Timer();
+        private readonly Timer sideCountTimer = new Timer();
         
         public BilliardForm()
         {
@@ -16,8 +16,8 @@ namespace BilliardsBalls
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            startBilliardMoving.Enabled = false;
-            endBilliardGame.Enabled = false;
+            startBilliardMovingButton.Enabled = false;
+            endBilliardGameButton.Enabled = false;
         }
         private void addBilliardBalls_Click_1(object sender, EventArgs e)
         {
@@ -28,8 +28,8 @@ namespace BilliardsBalls
                 ball.Show();
                 balls.Add(ball);
             }
-            startBilliardMoving.Enabled = true;
-            addBilliardBalls.Enabled = false;
+            startBilliardMovingButton.Enabled = true;
+            addBilliardBallsButton.Enabled = false;
             upLabel.Text = "Количество отскоков ";
             downLabel.Text = "Количество отскоков ";
             leftLabel.Text = "Количество отскоков ";
@@ -43,10 +43,10 @@ namespace BilliardsBalls
             {
                 ball.Start();
             }
-            startBilliardMoving.Enabled = false;
-            endBilliardGame.Enabled = true;
-            sideCountTimer.Start();
+            startBilliardMovingButton.Enabled = false;
+            endBilliardGameButton.Enabled = true;
             sideCountTimer.Tick += Timer_Tick;
+            sideCountTimer.Start();
         }
         private void Timer_Tick(object sender, EventArgs e)
         {
@@ -76,8 +76,8 @@ namespace BilliardsBalls
             }
             balls.Clear();
             Invalidate();
-            endBilliardGame.Enabled = false;
-            addBilliardBalls.Enabled = true;
+            endBilliardGameButton.Enabled = false;
+            addBilliardBallsButton.Enabled = true;
         }
     }
 }

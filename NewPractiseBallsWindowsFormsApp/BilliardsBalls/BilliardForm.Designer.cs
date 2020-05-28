@@ -28,45 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.addBalls = new System.Windows.Forms.Button();
-            this.startMoving = new System.Windows.Forms.Button();
-            this.endGame = new System.Windows.Forms.Button();
             this.upLabel = new System.Windows.Forms.Label();
             this.leftLabel = new System.Windows.Forms.Label();
             this.downLabel = new System.Windows.Forms.Label();
             this.rightLabel = new System.Windows.Forms.Label();
-            this.viewCatchedBalls = new System.Windows.Forms.Label();
-            this.endBilliardGame = new System.Windows.Forms.Button();
-            this.addBilliardBalls = new System.Windows.Forms.Button();
-            this.startBilliardMoving = new System.Windows.Forms.Button();
+            this.endBilliardGameButton = new System.Windows.Forms.Button();
+            this.addBilliardBallsButton = new System.Windows.Forms.Button();
+            this.startBilliardMovingButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // addBalls
-            // 
-            this.addBalls.Location = new System.Drawing.Point(704, 12);
-            this.addBalls.Name = "addBalls";
-            this.addBalls.Size = new System.Drawing.Size(84, 35);
-            this.addBalls.TabIndex = 12;
-            this.addBalls.Text = "Добавить шарики";
-            this.addBalls.UseVisualStyleBackColor = true;
-            // 
-            // startMoving
-            // 
-            this.startMoving.Location = new System.Drawing.Point(611, 12);
-            this.startMoving.Name = "startMoving";
-            this.startMoving.Size = new System.Drawing.Size(87, 35);
-            this.startMoving.TabIndex = 13;
-            this.startMoving.Text = "Начать движение";
-            this.startMoving.UseVisualStyleBackColor = true;
-            // 
-            // endGame
-            // 
-            this.endGame.Location = new System.Drawing.Point(514, 12);
-            this.endGame.Name = "endGame";
-            this.endGame.Size = new System.Drawing.Size(91, 36);
-            this.endGame.TabIndex = 14;
-            this.endGame.Text = "Закончить игру";
-            this.endGame.UseVisualStyleBackColor = true;
             // 
             // upLabel
             // 
@@ -104,43 +73,35 @@
             this.rightLabel.TabIndex = 12;
             this.rightLabel.Text = "Количество отскоков";
             // 
-            // viewCatchedBalls
-            // 
-            this.viewCatchedBalls.AutoSize = true;
-            this.viewCatchedBalls.Location = new System.Drawing.Point(48, 28);
-            this.viewCatchedBalls.Name = "viewCatchedBalls";
-            this.viewCatchedBalls.Size = new System.Drawing.Size(0, 13);
-            this.viewCatchedBalls.TabIndex = 11;
-            // 
             // endBilliardGame
             // 
-            this.endBilliardGame.Location = new System.Drawing.Point(464, 6);
-            this.endBilliardGame.Name = "endBilliardGame";
-            this.endBilliardGame.Size = new System.Drawing.Size(91, 36);
-            this.endBilliardGame.TabIndex = 10;
-            this.endBilliardGame.Text = "Закончить игру";
-            this.endBilliardGame.UseVisualStyleBackColor = true;
-            this.endBilliardGame.Click += new System.EventHandler(this.endBilliardGame_Click);
+            this.endBilliardGameButton.Location = new System.Drawing.Point(464, 6);
+            this.endBilliardGameButton.Name = "endBilliardGame";
+            this.endBilliardGameButton.Size = new System.Drawing.Size(91, 36);
+            this.endBilliardGameButton.TabIndex = 10;
+            this.endBilliardGameButton.Text = "Закончить игру";
+            this.endBilliardGameButton.UseVisualStyleBackColor = true;
+            this.endBilliardGameButton.Click += new System.EventHandler(this.endBilliardGame_Click);
             // 
             // addBilliardBalls
             // 
-            this.addBilliardBalls.Location = new System.Drawing.Point(698, 7);
-            this.addBilliardBalls.Name = "addBilliardBalls";
-            this.addBilliardBalls.Size = new System.Drawing.Size(84, 35);
-            this.addBilliardBalls.TabIndex = 9;
-            this.addBilliardBalls.Text = "Добавить шарики";
-            this.addBilliardBalls.UseVisualStyleBackColor = true;
-            this.addBilliardBalls.Click += new System.EventHandler(this.addBilliardBalls_Click_1);
+            this.addBilliardBallsButton.Location = new System.Drawing.Point(698, 7);
+            this.addBilliardBallsButton.Name = "addBilliardBalls";
+            this.addBilliardBallsButton.Size = new System.Drawing.Size(84, 35);
+            this.addBilliardBallsButton.TabIndex = 9;
+            this.addBilliardBallsButton.Text = "Добавить шарики";
+            this.addBilliardBallsButton.UseVisualStyleBackColor = true;
+            this.addBilliardBallsButton.Click += new System.EventHandler(this.addBilliardBalls_Click_1);
             // 
             // startBilliardMoving
             // 
-            this.startBilliardMoving.Location = new System.Drawing.Point(589, 7);
-            this.startBilliardMoving.Name = "startBilliardMoving";
-            this.startBilliardMoving.Size = new System.Drawing.Size(87, 35);
-            this.startBilliardMoving.TabIndex = 8;
-            this.startBilliardMoving.Text = "Начать движение";
-            this.startBilliardMoving.UseVisualStyleBackColor = true;
-            this.startBilliardMoving.Click += new System.EventHandler(this.startBilliardMoving_Click);
+            this.startBilliardMovingButton.Location = new System.Drawing.Point(589, 7);
+            this.startBilliardMovingButton.Name = "startBilliardMoving";
+            this.startBilliardMovingButton.Size = new System.Drawing.Size(87, 35);
+            this.startBilliardMovingButton.TabIndex = 8;
+            this.startBilliardMovingButton.Text = "Начать движение";
+            this.startBilliardMovingButton.UseVisualStyleBackColor = true;
+            this.startBilliardMovingButton.Click += new System.EventHandler(this.startBilliardMoving_Click);
             // 
             // BilliardForm
             // 
@@ -151,10 +112,9 @@
             this.Controls.Add(this.leftLabel);
             this.Controls.Add(this.downLabel);
             this.Controls.Add(this.rightLabel);
-            this.Controls.Add(this.viewCatchedBalls);
-            this.Controls.Add(this.endBilliardGame);
-            this.Controls.Add(this.addBilliardBalls);
-            this.Controls.Add(this.startBilliardMoving);
+            this.Controls.Add(this.endBilliardGameButton);
+            this.Controls.Add(this.addBilliardBallsButton);
+            this.Controls.Add(this.startBilliardMovingButton);
             this.Name = "BilliardForm";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
@@ -164,17 +124,13 @@
 
         #endregion
 
-        private System.Windows.Forms.Button addBalls;
-        private System.Windows.Forms.Button startMoving;
-        private System.Windows.Forms.Button endGame;
         private System.Windows.Forms.Label upLabel;
         private System.Windows.Forms.Label leftLabel;
         private System.Windows.Forms.Label downLabel;
         private System.Windows.Forms.Label rightLabel;
-        private System.Windows.Forms.Label viewCatchedBalls;
-        private System.Windows.Forms.Button endBilliardGame;
-        private System.Windows.Forms.Button addBilliardBalls;
-        private System.Windows.Forms.Button startBilliardMoving;
+        private System.Windows.Forms.Button endBilliardGameButton;
+        private System.Windows.Forms.Button addBilliardBallsButton;
+        private System.Windows.Forms.Button startBilliardMovingButton;
     }
 }
 

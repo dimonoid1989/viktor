@@ -10,19 +10,19 @@ namespace NewPractiseBallsWindowsFormsApp
         private int left = 0;
         private int right = 0;
         public delegate void BallDelegat();
-        public event BallDelegat OnMove;
+        public event BallDelegat BallTouchFormSide;
         public BilliardsBall(Form form) : base(form)
         {
             vx = random.Next(-30, 30);
             vy = random.Next(-30, 30);
             timer.Tick += Timer_Tick;
-            OnMove += MoveToOtherSide;
+            BallTouchFormSide += MoveToOtherSide;
         }
         private void Timer_Tick(object sender, EventArgs e)
         {
             if (!OnScreen())
             {
-               OnMove();
+               BallTouchFormSide();
             }
         }
         public void MoveToOtherSide()
