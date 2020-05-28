@@ -73,30 +73,30 @@
             this.rightLabel.TabIndex = 12;
             this.rightLabel.Text = "Количество отскоков";
             // 
-            // endBilliardGame
+            // endBilliardGameButton
             // 
             this.endBilliardGameButton.Location = new System.Drawing.Point(464, 6);
-            this.endBilliardGameButton.Name = "endBilliardGame";
+            this.endBilliardGameButton.Name = "endBilliardGameButton";
             this.endBilliardGameButton.Size = new System.Drawing.Size(91, 36);
             this.endBilliardGameButton.TabIndex = 10;
             this.endBilliardGameButton.Text = "Закончить игру";
             this.endBilliardGameButton.UseVisualStyleBackColor = true;
             this.endBilliardGameButton.Click += new System.EventHandler(this.endBilliardGame_Click);
             // 
-            // addBilliardBalls
+            // addBilliardBallsButton
             // 
             this.addBilliardBallsButton.Location = new System.Drawing.Point(698, 7);
-            this.addBilliardBallsButton.Name = "addBilliardBalls";
+            this.addBilliardBallsButton.Name = "addBilliardBallsButton";
             this.addBilliardBallsButton.Size = new System.Drawing.Size(84, 35);
             this.addBilliardBallsButton.TabIndex = 9;
             this.addBilliardBallsButton.Text = "Добавить шарики";
             this.addBilliardBallsButton.UseVisualStyleBackColor = true;
             this.addBilliardBallsButton.Click += new System.EventHandler(this.addBilliardBalls_Click_1);
             // 
-            // startBilliardMoving
+            // startBilliardMovingButton
             // 
             this.startBilliardMovingButton.Location = new System.Drawing.Point(589, 7);
-            this.startBilliardMovingButton.Name = "startBilliardMoving";
+            this.startBilliardMovingButton.Name = "startBilliardMovingButton";
             this.startBilliardMovingButton.Size = new System.Drawing.Size(87, 35);
             this.startBilliardMovingButton.TabIndex = 8;
             this.startBilliardMovingButton.Text = "Начать движение";
@@ -117,6 +117,7 @@
             this.Controls.Add(this.startBilliardMovingButton);
             this.Name = "BilliardForm";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.BilliardForm_MouseClick);
             this.ResumeLayout(false);
             this.PerformLayout();
 

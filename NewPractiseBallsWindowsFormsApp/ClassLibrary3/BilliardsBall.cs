@@ -32,12 +32,12 @@ namespace NewPractiseBallsWindowsFormsApp
                 vy *= -1;
                 up++;
             }
-            if (y >= (form.Height - size*2))
+            if (y >= (form.ClientSize.Height - size))
             {
                 vy *= -1;
                 down++;
             }
-            if (x >= (form.Width - size*1.5))
+            if (x >= (form.ClientSize.Width - size))
             {
                 vx *= -1;
                 right++;

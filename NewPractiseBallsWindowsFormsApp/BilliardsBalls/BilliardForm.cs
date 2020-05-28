@@ -56,10 +56,10 @@ namespace BilliardsBalls
             int rightSide = 0;
             foreach (var ball in balls)
             {
-                upLabel.Text = "Количество отскоков " + upSide ;
-                downLabel.Text = "Количество отскоков " + downSide ;
-                leftLabel.Text = "Количество отскоков " + leftSide ;
-                rightLabel.Text = "Количество отскоков " + rightSide ;
+                upLabel.Text = "Количество отскоков " + upSide;
+                downLabel.Text = "Количество отскоков " + downSide;
+                leftLabel.Text = "Количество отскоков " + leftSide;
+                rightLabel.Text = "Количество отскоков " + rightSide;
                 upSide += ball.UpSide();
                 downSide += ball.DownSide();
                 leftSide += ball.LeftSide();
@@ -78,6 +78,11 @@ namespace BilliardsBalls
             Invalidate();
             endBilliardGameButton.Enabled = false;
             addBilliardBallsButton.Enabled = true;
+        }
+
+        private void BilliardForm_MouseClick(object sender, MouseEventArgs e)
+        {
+            var test = e.Location;
         }
     }
 }

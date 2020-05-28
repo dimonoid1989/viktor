@@ -68,7 +68,7 @@ namespace NewPractiseBallsWindowsFormsApp
         }
         public bool OnScreen()
         {
-            return x < form.Width - size* 1.5 && y < form.Height - size*2 && x > 0 && y > 0;
+            return x < form.ClientSize.Width - size && y < form.ClientSize.Height - size && x > 0 && y > 0;
         }
         public bool IsBallActive()
         {
