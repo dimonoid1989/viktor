@@ -28,6 +28,7 @@ namespace BilliardsBalls
             {
                 var ball = new BilliardsBall(this);
                 ball.Show();
+                ball.OnTouchSide += Ball_OnTouchSide;
                 balls.Add(ball);
             }
             startBilliardMovingButton.Enabled = true;
