@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-namespace NewPractiseBallsWindowsFormsApp
+namespace ClassLibrary3
 {
     public class RandomSideBall : RandomPointBall
     {
