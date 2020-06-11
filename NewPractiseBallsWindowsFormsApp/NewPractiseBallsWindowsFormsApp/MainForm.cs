@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
+using ClassLibrary3;
 
 namespace NewPractiseBallsWindowsFormsApp
 {
@@ -40,6 +40,7 @@ namespace NewPractiseBallsWindowsFormsApp
                 balls.Add(ball);
             }
             startMoving.Enabled = true;
+            
         }
         private void MainForm_MouseClick(object sender, MouseEventArgs e)
         {

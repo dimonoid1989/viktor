@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
+using System.Drawing;
 
-namespace NewPractiseBallsWindowsFormsApp
+namespace ClassLibrary3
 {
-    class Ball 
+    public class Ball 
     {
         protected static Random random = new Random();
         protected int x = 250;
@@ -12,26 +12,28 @@ namespace NewPractiseBallsWindowsFormsApp
         protected int vx = 10;
         protected int vy = 10;
         protected Brush brush = Brushes.Red;
-        private readonly MainForm form;
-        private readonly Timer timer = new Timer();
+        protected readonly Form form;
+        protected readonly Timer timer = new Timer();
         private Rectangle rectangle;
         protected readonly int size;
-        private readonly double radius;
-        public Ball(MainForm form)
+        protected readonly double radius;
+       
+        public Ball(Form form)
         {
             this.form = form;
-            timer.Interval = 100;
+            timer.Interval = 20;
             timer.Tick += Timer_Tick;
             size = 50;
             radius = size / 2;
         }
+       
         public void Show()
         {
             Graphics graphics = form.CreateGraphics();
             rectangle = new Rectangle(x, y, size, size);
             graphics.FillEllipse(brush, rectangle);
         }
-        private void Go()
+        protected virtual void Go()
         {
             x += vx;
             y += vy;
@@ -66,11 +68,12 @@ namespace NewPractiseBallsWindowsFormsApp
         }
         public bool OnScreen()
         {
-            return x < form.Width - size && y < form.Height - size && x > 0 && y > 0;
+            return x < form.ClientSize.Width - size && y < form.ClientSize.Height - size && x > 0 && y > 0;
         }
         public bool IsBallActive()
         {
             return timer.Enabled;
         }
+       
     }
 }

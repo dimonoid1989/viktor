@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{90C7080F-EDD0-42B9-BEFB-AF25BE63CE7C}</ProjectGuid>
+    <ProjectGuid>{F706C4AC-2DA7-4DC2-86A5-CA1346C8CA90}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>NewPractiseBallsWindowsFormsApp</RootNamespace>
-    <AssemblyName>NewPractiseBallsWindowsFormsApp</AssemblyName>
+    <RootNamespace>BilliardsBalls</RootNamespace>
+    <AssemblyName>BilliardsBalls</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,16 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainForm.cs">
+    <Compile Include="BilliardForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="BilliardForm.Designer.cs">
+      <DependentUpon>BilliardForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="BilliardForm.resx">
+      <DependentUpon>BilliardForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
