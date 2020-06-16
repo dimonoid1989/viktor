@@ -19,7 +19,7 @@ namespace ClassLibrary3
         }
         private void SlowerBall()
         {
-            timerForRising.Interval = 500;
+            timerForRising.Interval = 300;
             timerForRising.Tick += TimerForRising_Tick;
             timerForRising.Start();
         }
