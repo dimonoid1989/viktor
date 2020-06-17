@@ -37,7 +37,7 @@
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(100, 23);
             this.startButton.TabIndex = 0;
-            this.startButton.Text = "Добавить шарик";
+            this.startButton.Text = "Начать игру";
             this.startButton.UseVisualStyleBackColor = true;
             this.startButton.Click += new System.EventHandler(this.startButton_Click);
             // 

@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ball.cs" />
+    <Compile Include="BallDisapearedEventArgs.cs" />
     <Compile Include="BilliardsBall.cs" />
     <Compile Include="FruitNinjaBall.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
