@@ -20,7 +20,7 @@ namespace Fruit_Ninja_ballApp
         private Random random;
         private int life = 1;
         public event EventHandler FormIsEmpty;
-        bool end = false;
+        bool end;
 
         public FruitNinjaForm()
         {
@@ -29,6 +29,7 @@ namespace Fruit_Ninja_ballApp
 
         private void startButton_Click(object sender, EventArgs e)
         {
+            end = false;
             AddBalls();
             FormIsEmpty += FruitNinjaForm_FormIsEmpty;
         }
