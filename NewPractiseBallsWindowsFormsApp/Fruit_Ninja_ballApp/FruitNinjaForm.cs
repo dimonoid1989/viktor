@@ -31,27 +31,11 @@ namespace Fruit_Ninja_ballApp
             AddBalls();
             FormIsEmpty += FruitNinjaForm_FormIsEmpty;
         }
-
-        private void Ball_BallDisapeared(object sender, BallDisapearedEventArgs e)
-        {
-            if (e.FruitNinjaBall.Active == true)
-            {
-                countBalls -= 1;
-                e.FruitNinjaBall.Active = false;
-            }
-            
-            if (countBalls == 0)
-            {
-                FormIsEmpty.Invoke(this, new EventArgs());
-            }
-        }
-
         private void FruitNinjaForm_FormIsEmpty(object sender, EventArgs e)
         {
             balls.Clear();
             AddBalls();
         }
-
         private void AddBalls()
         {
             random = new Random();
@@ -65,7 +49,32 @@ namespace Fruit_Ninja_ballApp
             countBalls = balls.Count;
             foreach (var ball in balls)
             {
-                ball.BallDisapeared += Ball_BallDisapeared;
+                ball.BallGoneAway += Ball_BallDisapeared;
+            }
+        }
+        private void FruitNinjaForm_MouseMove(object sender, MouseEventArgs e)
+        {
+            var location = e.Location;
+            foreach(var ball in balls)
+            {
+                if (ball.ClickCheck(location))
+                {
+                    ball.BallCought(ball);
+                    return;
+                }
+            }
+        }
+        private void Ball_BallDisapeared(object sender, BallDisapearedEventArgs e)
+        {
+            if (e.FruitNinjaBall.Active == true)
+            {
+                countBalls -= 1;
+                e.FruitNinjaBall.Active = false;
+            }
+            
+            if (countBalls == 0)
+            {
+                FormIsEmpty.Invoke(this, new EventArgs());
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace ClassLibrary3
     {
         public bool Active { get; set; }
         private readonly Timer timerForRising = new Timer();
-        public event EventHandler<BallDisapearedEventArgs> BallDisapeared;
+        public event EventHandler<BallDisapearedEventArgs> BallGoneAway;
         public FruitNinjaBall(Form form) : base(form)
         {
             Active = true;
@@ -25,7 +26,6 @@ namespace ClassLibrary3
             timerForRising.Interval = 200;
             timerForRising.Tick += TimerForRising_Tick;
             timerForRising.Start();
-            
         }
         private void TimerForRising_Tick(object sender, EventArgs e)
         {
@@ -33,12 +33,16 @@ namespace ClassLibrary3
             {
                 vy += 1;
             }
-            if (!OnScreen() && vy >= 1 )
+            if (!OnScreen() && vy >= 1 ) //корректировка срабатывания события
             {
-                BallDisapeared.Invoke(this, new BallDisapearedEventArgs(this));
+                BallGoneAway.Invoke(this, new BallDisapearedEventArgs(this));
             }
-            
         }
-
+        public void BallCought(FruitNinjaBall ball)
+        {
+            BallGoneAway.Invoke(ball, new BallDisapearedEventArgs(ball));
+            StopMoving();
+            Clear();
+        }
     }
 }

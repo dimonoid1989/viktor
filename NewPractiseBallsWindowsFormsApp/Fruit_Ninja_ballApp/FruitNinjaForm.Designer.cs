@@ -49,6 +49,7 @@
             this.Controls.Add(this.startButton);
             this.Name = "FruitNinjaForm";
             this.Text = "Form1";
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.FruitNinjaForm_MouseMove);
             this.ResumeLayout(false);
 
         }

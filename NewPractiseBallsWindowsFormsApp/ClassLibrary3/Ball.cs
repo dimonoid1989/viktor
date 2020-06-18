@@ -38,7 +38,7 @@ namespace ClassLibrary3
             x += vx;
             y += vy;
         }
-        private void Clear()
+        protected void Clear()
         {
             var graphics = form.CreateGraphics();
             SolidBrush solidBrush = new SolidBrush(form.BackColor);
