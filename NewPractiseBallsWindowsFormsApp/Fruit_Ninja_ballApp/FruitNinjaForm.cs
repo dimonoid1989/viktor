@@ -18,7 +18,8 @@ namespace Fruit_Ninja_ballApp
         private readonly List<FruitNinjaBall> balls = new List<FruitNinjaBall>();
         private int countBalls;
         private Random random;
-        private int life = 1;
+        private int life = 5;
+        private int ballCought;
         public event EventHandler FormIsEmpty;
         bool end;
 
@@ -32,6 +33,8 @@ namespace Fruit_Ninja_ballApp
             end = false;
             AddBalls();
             FormIsEmpty += FruitNinjaForm_FormIsEmpty;
+            lifesCountLabel.Text = life+"";
+            ballCoughtLabel.Text = ballCought + "";
         }
 
         private void FruitNinjaForm_FormIsEmpty(object sender, EventArgs e)
@@ -57,7 +60,6 @@ namespace Fruit_Ninja_ballApp
                     ball.BallGoneAway += Ball_BallDisapeared;
                     ball.BallMouseCought += Ball_BallMouseCought;
                 }
-
             }
             else
             {
@@ -72,12 +74,13 @@ namespace Fruit_Ninja_ballApp
             MessageBox.Show("Игра окончена");
             life = 1;
         }
-
         private void Ball_BallMouseCought(object sender, BallDisapearedEventArgs e)
         {
             if (e.FruitNinjaBall.Active == true)
             {
                 countBalls -= 1;
+                ballCought += 1;
+                ballCoughtLabel.Text = ballCought + "";
                 e.FruitNinjaBall.Active = false;
             }
             if (countBalls == 0 && end == false)
@@ -105,6 +108,7 @@ namespace Fruit_Ninja_ballApp
             {
                 countBalls -= 1;
                 life -= 1;
+                lifesCountLabel.Text = life + "";
                 e.FruitNinjaBall.Active = false;
             }
 
