@@ -14,12 +14,13 @@ namespace Fruit_Ninja_ballApp
 {
     public partial class FruitNinjaForm : Form
     {
-        FruitNinjaBall ball;
-        List<FruitNinjaBall> balls = new List<FruitNinjaBall>();
-        int countBalls;
-        Random random;
-        // int life = 5;
+        private FruitNinjaBall ball;
+        private readonly List<FruitNinjaBall> balls = new List<FruitNinjaBall>();
+        private int countBalls;
+        private Random random;
+        private int life = 1;
         public event EventHandler FormIsEmpty;
+        bool end = false;
 
         public FruitNinjaForm()
         {
@@ -31,6 +32,7 @@ namespace Fruit_Ninja_ballApp
             AddBalls();
             FormIsEmpty += FruitNinjaForm_FormIsEmpty;
         }
+
         private void FruitNinjaForm_FormIsEmpty(object sender, EventArgs e)
         {
             balls.Clear();
@@ -38,30 +40,62 @@ namespace Fruit_Ninja_ballApp
         }
         private void AddBalls()
         {
-            random = new Random();
-            for (int i = 0; i <= random.Next(1, 5); i++)
+            if (life > 0)
             {
-                ball = new FruitNinjaBall(this);
-                balls.Add(ball);
-                ball.Show();
-                ball.Start();
+                random = new Random();
+                for (int i = 0; i <= random.Next(1, 5); i++)
+                {
+                    ball = new FruitNinjaBall(this);
+                    balls.Add(ball);
+                    ball.Show();
+                    ball.Start();
+                }
+                countBalls = balls.Count;
+                foreach (var ball in balls)
+                {
+                    ball.BallGoneAway += Ball_BallDisapeared;
+                    ball.BallMouseCought += Ball_BallMouseCought;
+                }
+
             }
-            countBalls = balls.Count;
-            foreach (var ball in balls)
+            else
             {
-                ball.BallGoneAway += Ball_BallDisapeared;
+                GameOver();
             }
         }
+
+        private void GameOver()
+        {
+            end = true;
+            FormIsEmpty -= FruitNinjaForm_FormIsEmpty;
+            MessageBox.Show("Игра окончена");
+            life = 1;
+        }
+
+        private void Ball_BallMouseCought(object sender, BallDisapearedEventArgs e)
+        {
+            if (e.FruitNinjaBall.Active == true)
+            {
+                countBalls -= 1;
+                e.FruitNinjaBall.Active = false;
+            }
+            if (countBalls == 0 && end == false)
+            {
+                FormIsEmpty.Invoke(this, new EventArgs());
+            }
+        }
+
         private void FruitNinjaForm_MouseMove(object sender, MouseEventArgs e)
         {
             var location = e.Location;
-            foreach(var ball in balls)
+            foreach (var ball in balls)
             {
-                if (ball.ClickCheck(location))
+                if (ball.ClickCheck(location) && end == false)
                 {
                     ball.BallCought(ball);
                     return;
                 }
+
             }
         }
         private void Ball_BallDisapeared(object sender, BallDisapearedEventArgs e)
@@ -69,10 +103,11 @@ namespace Fruit_Ninja_ballApp
             if (e.FruitNinjaBall.Active == true)
             {
                 countBalls -= 1;
+                life -= 1;
                 e.FruitNinjaBall.Active = false;
             }
-            
-            if (countBalls == 0)
+
+            if (countBalls == 0 && end == false)
             {
                 FormIsEmpty.Invoke(this, new EventArgs());
             }

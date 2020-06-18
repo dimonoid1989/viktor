@@ -13,6 +13,7 @@ namespace ClassLibrary3
         public bool Active { get; set; }
         private readonly Timer timerForRising = new Timer();
         public event EventHandler<BallDisapearedEventArgs> BallGoneAway;
+        public event EventHandler<BallDisapearedEventArgs> BallMouseCought;
         public FruitNinjaBall(Form form) : base(form)
         {
             Active = true;
@@ -40,7 +41,7 @@ namespace ClassLibrary3
         }
         public void BallCought(FruitNinjaBall ball)
         {
-            BallGoneAway.Invoke(ball, new BallDisapearedEventArgs(ball));
+            BallMouseCought.Invoke(ball, new BallDisapearedEventArgs(ball));
             StopMoving();
             Clear();
         }
