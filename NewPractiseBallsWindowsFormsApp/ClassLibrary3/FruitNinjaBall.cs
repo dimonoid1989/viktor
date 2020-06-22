@@ -17,7 +17,7 @@ namespace ClassLibrary3
         public event EventHandler<BallDisapearedEventArgs> BallGoneAway;
         public event EventHandler<BallDisapearedEventArgs> BallMouseCought;
         private int gravity = 1;
-        readonly int screemPart = random.Next(1, 3);
+        readonly double screenPart = random.Next(1,10) + 0.5;
         private bool IsFalling => vy >= 1;
         public FruitNinjaBall(Form form) : base(form)
         {
@@ -35,7 +35,7 @@ namespace ClassLibrary3
         }
         private void TimerForRising_Tick(object sender, EventArgs e)
         {
-            if (vy <= 2 && y < form.ClientSize.Height/2)
+            if (vy <= 2 && y < form.ClientSize.Height/screenPart)
             {
                 vy += gravity;
             }
