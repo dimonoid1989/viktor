@@ -81,7 +81,6 @@ namespace Fruit_Ninja_ballApp
                 countBalls -= 1;
                 ballCought += 1;
                 ballCoughtLabel.Text = ballCought + "";
-                e.FruitNinjaBall.Active = false;
             }
             if (countBalls == 0 && end == false)
             {
@@ -109,7 +108,6 @@ namespace Fruit_Ninja_ballApp
                 countBalls -= 1;
                 life -= 1;
                 lifesCountLabel.Text = life + "";
-                e.FruitNinjaBall.Active = false;
             }
 
             if (countBalls == 0 && end == false)

@@ -10,13 +10,14 @@ namespace ClassLibrary3
 {
     public class FruitNinjaBall : RandomSideBall
     {
-        public bool Active { get; set; }
+        public bool Active  => timer.Enabled;
         private readonly Timer timerForRising = new Timer();
         public event EventHandler<BallDisapearedEventArgs> BallGoneAway;
         public event EventHandler<BallDisapearedEventArgs> BallMouseCought;
+        private int gravity = 1;
+        private bool IsFalling => vy >= 1;
         public FruitNinjaBall(Form form) : base(form)
         {
-            Active = true;
             y = form.ClientSize.Height;
             vy = random.Next(-5, 0);
             vx = random.Next(-1, 1);
@@ -24,7 +25,7 @@ namespace ClassLibrary3
         }
         private void SlowerBall()
         {
-            timerForRising.Interval = 200;
+            timerForRising.Interval = 20;
             timerForRising.Tick += TimerForRising_Tick;
             timerForRising.Start();
         }
@@ -32,11 +33,13 @@ namespace ClassLibrary3
         {
             if (vy <= 2 && y < form.ClientSize.Height/2)
             {
-                vy += 1;
+                vy += gravity;
             }
-            if (!OnScreen() && vy >= 1 ) //корректировка срабатывания события
+            if (!OnScreen() && IsFalling ) //корректировка срабатывания события
             {
                 BallGoneAway.Invoke(this, new BallDisapearedEventArgs(this));
+                StopMoving();
+                Clear();
             }
         }
         public void BallCought(FruitNinjaBall ball)
