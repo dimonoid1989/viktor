@@ -76,7 +76,7 @@ namespace Fruit_Ninja_ballApp
         }
         private void Ball_BallMouseCought(object sender, BallDisapearedEventArgs e)
         {
-            if (e.FruitNinjaBall.Active == true)
+            if (e.FruitNinjaBall.Active && e.FruitNinjaBall.wasEvent == false)
             {
                 countBalls -= 1;
                 ballCought += 1;
@@ -103,7 +103,7 @@ namespace Fruit_Ninja_ballApp
         }
         private void Ball_BallDisapeared(object sender, BallDisapearedEventArgs e)
         {
-            if (e.FruitNinjaBall.Active == true)
+            if (e.FruitNinjaBall.Active && e.FruitNinjaBall.wasEvent == false)
             {
                 countBalls -= 1;
                 life -= 1;
