@@ -4,7 +4,7 @@ using System.Drawing;
 
 namespace ClassLibrary3
 {
-    public class Ball 
+    public class Ball
     {
         protected static Random random = new Random();
         protected int x = 250;
@@ -38,7 +38,7 @@ namespace ClassLibrary3
             x += vx;
             y += vy;
         }
-        private void Clear()
+        protected void Clear()
         {
             var graphics = form.CreateGraphics();
             SolidBrush solidBrush = new SolidBrush(form.BackColor);
