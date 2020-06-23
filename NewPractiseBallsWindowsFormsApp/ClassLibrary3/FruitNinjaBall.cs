@@ -12,7 +12,7 @@ namespace ClassLibrary3
     {
         public bool Active => timer.Enabled;
 
-        public bool wasEvent { get; private set; }
+        public bool WasEvent { get; private set; }
         private readonly Timer timerForRising = new Timer();
         public event EventHandler<BallDisapearedEventArgs> BallGoneAway;
         public event EventHandler<BallDisapearedEventArgs> BallMouseCought;
@@ -25,7 +25,7 @@ namespace ClassLibrary3
             vy = random.Next(-5, 0);
             vx = random.Next(-1, 1);
             SlowerBall();
-            wasEvent = false;
+            WasEvent = false;
         }
         private void SlowerBall()
         {
@@ -42,13 +42,13 @@ namespace ClassLibrary3
             if (!OnScreen() && IsFalling ) 
             {
                 BallGoneAway.Invoke(this, new BallDisapearedEventArgs(this));
-                wasEvent = true;
+                WasEvent = true;
             }
         }
         public void BallCought(FruitNinjaBall ball)
         {
             BallMouseCought.Invoke(ball, new BallDisapearedEventArgs(ball));
-            wasEvent = true;
+            WasEvent = true;
             StopMoving();
             Clear();
         }
