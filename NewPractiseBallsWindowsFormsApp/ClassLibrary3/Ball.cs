@@ -15,7 +15,7 @@ namespace ClassLibrary3
         protected readonly Form form;
         protected readonly Timer timer = new Timer();
         private Rectangle rectangle;
-        protected readonly int size;
+        protected int size;
         protected readonly double radius;
        
         public Ball(Form form)
@@ -27,7 +27,7 @@ namespace ClassLibrary3
             radius = size / 2;
         }
        
-        public void Show()
+        public virtual void Show()
         {
             Graphics graphics = form.CreateGraphics();
             rectangle = new Rectangle(x, y, size, size);

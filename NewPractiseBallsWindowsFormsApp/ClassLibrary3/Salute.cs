@@ -28,6 +28,7 @@ namespace ClassLibrary3
                 BallPoint = new Point(x, y);
                 Boomed.Invoke(this, new BallDisapearedEventArgs(this));
                 wasBoom = true;
+                StopMoving();
                 Clear();
             }
         }
