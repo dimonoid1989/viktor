@@ -8,10 +8,15 @@ namespace ClassLibrary3
 {
     public class BallDisapearedEventArgs : EventArgs
     {
-        public FruitNinjaBall FruitNinjaBall { get; }
-        public BallDisapearedEventArgs(FruitNinjaBall fruitNinjaBall)
+        public Salute salutBall { get; }
+        public FruitNinjaBall fruitNinjaBall { get; }
+        public BallDisapearedEventArgs(Salute ball)
         {
-            FruitNinjaBall = fruitNinjaBall;
+            salutBall = ball;
+        }
+        public BallDisapearedEventArgs(FruitNinjaBall ball)
+        {
+            fruitNinjaBall = ball;
         }
     }
 }

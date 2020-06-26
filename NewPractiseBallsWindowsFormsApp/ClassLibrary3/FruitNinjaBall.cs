@@ -12,13 +12,13 @@ namespace ClassLibrary3
     {
         public bool Active => timer.Enabled;
 
-        public bool WasEvent { get; private set; }
+        public bool WasEvent { get; protected set; }
         private readonly Timer timerForRising = new Timer();
         public event EventHandler<BallDisapearedEventArgs> BallGoneAway;
         public event EventHandler<BallDisapearedEventArgs> BallMouseCought;
         private int gravity = 1;
         readonly double screenPart = random.Next(1,10) + 0.5;
-        private bool IsFalling => vy >= 1;
+        protected bool IsFalling => vy >= 1;
         public FruitNinjaBall(Form form) : base(form)
         {
             y = form.ClientSize.Height;
@@ -33,7 +33,7 @@ namespace ClassLibrary3
             timerForRising.Tick += TimerForRising_Tick;
             timerForRising.Start();
         }
-        private void TimerForRising_Tick(object sender, EventArgs e)
+        protected virtual void TimerForRising_Tick(object sender, EventArgs e)
         {
             if (vy <= 2 && y < form.ClientSize.Height/screenPart)
             {
