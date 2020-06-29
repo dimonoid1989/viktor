@@ -6,8 +6,8 @@ namespace ClassLibrary3
     {
         public RandomPointBall(Form form) : base(form)
         {
-            x = random.Next(0, form.ClientSize.Width - size);
-            y = random.Next(0, form.ClientSize.Height - size);
+            X = random.Next(0, form.ClientSize.Width - size);
+            Y = random.Next(0, form.ClientSize.Height - size);
         }
     }
 }

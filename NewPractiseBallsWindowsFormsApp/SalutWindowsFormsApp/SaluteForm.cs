@@ -30,24 +30,13 @@ namespace SalutWindowsFormsApp
             ball = new Salute(this);
             ball.Start();
             ball.Boomed += Ball_Boomed;
-            //ball.BallGoneAway += Ball_BallGoneAway;
         }
-
-        private void Ball_BallGoneAway(object sender, BallDisapearedEventArgs e)
-        {
-            if (!e.fruitNinjaBall.WasEvent)
-            {
-                AddSalute();
-            }
-            
-        }
-
         private void Ball_Boomed(object sender, BallDisapearedEventArgs e)
         {
             var list = new List<RandomSideBall> { };
             for (int i = 0; i < random.Next(5, 10); i++)
             {
-                var ball = new RandomSideBall(this, e.salutBall.BallPoint.X, e.salutBall.BallPoint.Y);
+                var ball = new RandomSideBall(this, e.Ball.X, e.Ball.Y);
                 list.Add(ball);
                 ball.Start();
             }

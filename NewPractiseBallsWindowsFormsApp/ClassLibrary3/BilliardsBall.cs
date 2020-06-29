@@ -14,22 +14,22 @@ namespace ClassLibrary3
         protected override void Go()
         {
             base.Go();
-            if (y <= 0)
+            if (Y <= 0)
             {
                 vy *= -1;
                 OnTouchSide.Invoke(this, new TouchFormEvenArgs(Side.up));
             }
-            if (y >= (form.ClientSize.Height - size))
+            if (Y >= (form.ClientSize.Height - size))
             {
                 vy *= -1;
                 OnTouchSide.Invoke(this, new TouchFormEvenArgs(Side.down));
             }
-            if (x >= (form.ClientSize.Width - size))
+            if (X >= (form.ClientSize.Width - size))
             {
                 vx *= -1;
                 OnTouchSide.Invoke(this, new TouchFormEvenArgs(Side.right));
             }
-            if (x <= 0)
+            if (X <= 0)
             {
                 vx *= -1;
                 OnTouchSide.Invoke(this, new TouchFormEvenArgs(Side.left));

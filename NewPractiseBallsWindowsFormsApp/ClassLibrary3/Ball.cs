@@ -7,8 +7,8 @@ namespace ClassLibrary3
     public class Ball
     {
         protected static Random random = new Random();
-        protected int x = 250;
-        protected int y = 250;
+        public int X { get; protected set; } = 250;
+        public int Y { get; protected set; } = 250;
         protected int vx = 10;
         protected int vy = 10;
         protected Brush brush = Brushes.Red;
@@ -30,13 +30,13 @@ namespace ClassLibrary3
         public virtual void Show()
         {
             Graphics graphics = form.CreateGraphics();
-            rectangle = new Rectangle(x, y, size, size);
+            rectangle = new Rectangle(X, Y, size, size);
             graphics.FillEllipse(brush, rectangle);
         }
         protected virtual void Go()
         {
-            x += vx;
-            y += vy;
+            X += vx;
+            Y += vy;
         }
         protected void Clear()
         {
@@ -64,11 +64,11 @@ namespace ClassLibrary3
         }
         public bool ClickCheck(Point location)
         {
-            return Math.Pow(location.X - x - radius, 2) + Math.Pow(location.Y - y - radius, 2) <= Math.Pow(size, 2);
+            return Math.Pow(location.X - X - radius, 2) + Math.Pow(location.Y - Y - radius, 2) <= Math.Pow(size, 2);
         }
         public bool OnScreen()
         {
-            return x < form.ClientSize.Width - size && y < form.ClientSize.Height - size && x > 0 && y > 0;
+            return X < form.ClientSize.Width - size && Y < form.ClientSize.Height - size && X > 0 && Y > 0;
         }
         public bool IsBallActive()
         {
