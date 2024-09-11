@@ -13,5 +13,7 @@ namespace ClassLibrary3
         {
             Ball = ball;
         }
+
+        //Изменение ддля форка и ревью
     }
 }
